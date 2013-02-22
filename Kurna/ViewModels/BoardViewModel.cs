@@ -10,6 +10,22 @@ namespace Kurna.ViewModels
 {
     public class BoardViewModel : ReactiveObject
     {
+        #region Players
+        private Player _PlayerOne = null;
+        public Player PlayerOne
+        {
+            get { return _PlayerOne; }
+            set { this.RaiseAndSetIfChanged(x => x.PlayerOne, value); }
+        }
+
+        private Player _PlayerTwo = null;
+        public Player PlayerTwo
+        {
+            get { return _PlayerTwo; }
+            set { this.RaiseAndSetIfChanged(x => x.PlayerTwo, value); }
+        }
+        #endregion
+
         #region OuterSquare
         private TileStatus _OuterTopLeft = TileStatus.Empty;
         public TileStatus OuterTopLeft
