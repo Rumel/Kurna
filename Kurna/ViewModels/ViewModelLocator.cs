@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +41,23 @@ namespace Kurna.ViewModels
             set
             {
                 _boardViewModel = value;
+            }
+        }
+
+        private static MainWindowViewModel _mainWindowViewModel = null;
+        public static MainWindowViewModel MainWindowViewModel
+        {
+            get
+            {
+                if (_mainWindowViewModel == null)
+                {
+                    _mainWindowViewModel = new MainWindowViewModel();
+                }
+                return _mainWindowViewModel;
+            }
+            set
+            {
+                _mainWindowViewModel = value;
             }
         }
     }

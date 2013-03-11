@@ -23,6 +23,12 @@ namespace Kurna.Views
         public HomePage()
         {
             InitializeComponent();
+            this.DataContext = ViewModels.ViewModelLocator.HomePageViewModel;
+        }
+
+        private void NewGame(object sender, RoutedEventArgs e)
+        {
+            ViewModels.ViewModelLocator.MainWindowViewModel.CurrentControl = new Views.BoardPage();
         }
     }
 }

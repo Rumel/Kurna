@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="640" d:DesignWidth="800" d:DataContext="{Binding Source=ViewModelLocator, Path=HomePageViewModel}">
+             d:DesignHeight="640" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,6 +23,7 @@
                 Width="400" 
                 Height="160"
                 FontSize="64"
-                FontWeight="SemiBold"/>
+                FontWeight="SemiBold"
+                Click="NewGame"/>
     </Grid>
 </UserControl>

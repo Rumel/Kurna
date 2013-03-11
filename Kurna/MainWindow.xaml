@@ -4,8 +4,5 @@
         xmlns:views="clr-namespace:Kurna.Views"
         Title="Kurna" Height="640" Width="800" ResizeMode="NoResize">
     <Grid>
-        <views:HomePage>
-            
-        </views:HomePage>
     </Grid>
 </Window>

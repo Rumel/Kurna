@@ -23,6 +23,7 @@ namespace Kurna
         public MainWindow()
         {
             InitializeComponent();
+            this.Content = ViewModels.ViewModelLocator.MainWindowViewModel.CurrentControl;
         }
     }
 }
