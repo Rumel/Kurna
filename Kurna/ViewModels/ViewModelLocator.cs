@@ -6,10 +6,27 @@ using System.Threading.Tasks;
 
 namespace Kurna.ViewModels
 {
-    public static class ViewModelLocator
+    public class ViewModelLocator
     {
-        private BoardViewModel _boardViewModel = null;
-        public BoardViewModel BoardViewModel
+        private static HomePageViewModel _homePageViewModel = null;
+        public static HomePageViewModel HomePageViewModel
+        {
+            get
+            {
+                if (_homePageViewModel == null)
+                {
+                    _homePageViewModel = new HomePageViewModel();
+                }
+                return _homePageViewModel;
+            }
+            set
+            {
+                _homePageViewModel = value;
+            }
+        }
+
+        private static BoardViewModel _boardViewModel = null;
+        public static BoardViewModel BoardViewModel
         {
             get
             {
