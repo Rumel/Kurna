@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Kurna.Views.Board"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="540" d:DesignWidth="540">
+    <UserControl.Resources>
+        <GridLength x:Key="OuterWidth">64</GridLength>
+        <GridLength x:Key="OuterHeight">64</GridLength>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{StaticResource OuterHeight}" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="{StaticResource OuterHeight}" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{StaticResource OuterWidth}" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="{StaticResource OuterWidth}" />
+        </Grid.ColumnDefinitions>
+        <!-- OuterTopLeft -->
+        <Rectangle Name="OuterTopLeft" Grid.Row="0" Grid.Column="0" Fill="Black" />
+        <!-- OuterTopMiddle -->
+        <Rectangle Name="OuterTopMiddle" Grid.Row="0" Grid.Column="1" Fill="Black" />
+        <!-- OuterTopRight -->
+        <Rectangle Name="OuterTopRight" Grid.Row="0" Grid.Column="2" Fill="Black" />
+        <!-- OuterMiddleLeft -->
+        <Rectangle Name="OuterMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="Black" />
+        <!-- OuterMiddleRight -->
+        <Rectangle Name="OuterMiddleRight" Grid.Row="1" Grid.Column="2" Fill="Black" />
+        <!-- OuterBottomLeft -->
+        <Rectangle Name="OuterBottomLeft" Grid.Row="2" Grid.Column="0" Fill="Black" />
+        <!-- OuterBottomMiddle -->
+        <Rectangle Name="OuterBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="Black" />
+        <!-- OuterBottomRight -->
+        <Rectangle Name="OuterBottomRight" Grid.Row="2" Grid.Column="2" Fill="Black" />
+        
+        <!-- Inner Board -->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource OuterHeight}" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="{StaticResource OuterHeight}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource OuterWidth}" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{StaticResource OuterWidth}" />
+            </Grid.ColumnDefinitions>
+            <!-- MiddleTopLeft -->
+            <Rectangle Name="MiddleTopLeft" Grid.Row="0" Grid.Column="0" Fill="Black" />
+            <!-- OuterTopMiddle -->
+            <Rectangle Name="MiddleTopMiddle" Grid.Row="0" Grid.Column="1" Fill="Black" />
+            <!-- MiddleTopRight -->
+            <Rectangle Name="MiddleTopRight" Grid.Row="0" Grid.Column="2" Fill="Black" />
+            <!-- MiddleMiddleLeft -->
+            <Rectangle Name="MiddleMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="Black" />
+            <!-- MiddleMiddleRight -->
+            <Rectangle Name="MiddleMiddleRight" Grid.Row="1" Grid.Column="2" Fill="Black" />
+            <!-- MiddleBottomLeft -->
+            <Rectangle Name="MiddleBottomLeft" Grid.Row="2" Grid.Column="0" Fill="Black" />
+            <!-- MiddleBottomMiddle -->
+            <Rectangle Name="MiddleBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="Black" />
+            <!-- MiddleBottomRight -->
+            <Rectangle Name="MiddleBottomRight" Grid.Row="2" Grid.Column="2" Fill="Black" />
+            
+            <!-- Innermost Board -->
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource OuterHeight}" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="{StaticResource OuterHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource OuterWidth}" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{StaticResource OuterWidth}" />
+                </Grid.ColumnDefinitions>
+
+                <!-- InnerTopLeft -->
+                <Rectangle Name="InnerTopLeft" Grid.Row="0" Grid.Column="0" Fill="Black" />
+                <!-- InnerTopMiddle -->
+                <Rectangle Name="InnerTopMiddle" Grid.Row="0" Grid.Column="1" Fill="Black" />
+                <!-- InnerTopRight -->
+                <Rectangle Name="InnerTopRight" Grid.Row="0" Grid.Column="2" Fill="Black" />
+                <!-- InnerMiddleLeft -->
+                <Rectangle Name="InnerMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="Black" />
+                <!--InnerMiddleRight -->
+                <Rectangle Name="InnerMiddleRight" Grid.Row="1" Grid.Column="2" Fill="Black" />
+                <!-- InnerBottomLeft -->
+                <Rectangle Name="InnerBottomLeft" Grid.Row="2" Grid.Column="0" Fill="Black" />
+                <!-- InnerBottomMiddle -->
+                <Rectangle Name="InnerBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="Black" />
+                <!-- InnerBottomRight -->
+                <Rectangle Name="InnerBottomRight" Grid.Row="2" Grid.Column="2" Fill="Black" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

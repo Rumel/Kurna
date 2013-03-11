@@ -108,6 +108,12 @@
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="ViewModels\BoardViewModel.cs" />
+    <Compile Include="Views\Board.xaml.cs">
+      <DependentUpon>Board.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BoardPage.xaml.cs">
+      <DependentUpon>BoardPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -123,6 +129,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Board.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BoardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
