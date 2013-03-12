@@ -42,63 +42,47 @@ namespace Kurna.Models
         protected virtual void CreateTiles()
         {
             // Create the initial tiles
-            var tiles = new[]
-            {
-                // Outer
-                new Tile { Name = "OuterTopLeft", Row = 0, Column = 0 },
-                new Tile { Name = "OuterTopMiddle" },
-                new Tile { Name = "OuterTopRight", Row = 0, Column = 6 },
-                new Tile { Name = "OuterMiddleLeft" },
-                new Tile { Name = "OuterMiddleRight" },
-                new Tile { Name = "OuterBottomLeft" },
-                new Tile { Name = "OuterBottomMiddle" },
-                new Tile { Name = "OuterBottomRight" },
-                // Middle
-                new Tile { Name = "MiddleTopLeft" },
-                new Tile { Name = "MiddleTopMiddle" },
-                new Tile { Name = "MiddleTopRight" },
-                new Tile { Name = "MiddleMiddleLeft" },
-                new Tile { Name = "MiddleMiddleRight" },
-                new Tile { Name = "MiddleBottomLeft" },
-                new Tile { Name = "MiddleBottomMiddle" },
-                new Tile { Name = "MiddleBottomRight" },
-                // Inner
-                new Tile { Name = "InnerTopLeft" },
-                new Tile { Name = "InnerTopMiddle" },
-                new Tile { Name = "InnerTopRight" },
-                new Tile { Name = "InnerMiddleLeft" },
-                new Tile { Name = "InnerMiddleRight" },
-                new Tile { Name = "InnerBottomLeft" },
-                new Tile { Name = "InnerBottomMiddle" },
-                new Tile { Name = "InnerBottomRight" }
-            };
-
-            // Add the initial tiles
-            Tiles = new ReactiveCollection<Tile>(tiles);
-            //foreach (var tile in tiles)
-            //{
-            //    Tiles.Add(tile.Name, tile);
-            //}
+            Tiles = new ReactiveCollection<Tile>(
+                new[]
+                {
+                    // Outer
+                    new Tile { Name = "OuterTopLeft", Row = 0, Column = 0 },
+                    new Tile { Name = "OuterTopMiddle", Row = 0, Column = 3 },
+                    new Tile { Name = "OuterTopRight", Row = 0, Column = 6 },
+                    new Tile { Name = "OuterMiddleLeft" },
+                    new Tile { Name = "OuterMiddleRight" },
+                    new Tile { Name = "OuterBottomLeft" },
+                    new Tile { Name = "OuterBottomMiddle" },
+                    new Tile { Name = "OuterBottomRight" },
+                    // Middle
+                    new Tile { Name = "MiddleTopLeft" },
+                    new Tile { Name = "MiddleTopMiddle" },
+                    new Tile { Name = "MiddleTopRight" },
+                    new Tile { Name = "MiddleMiddleLeft" },
+                    new Tile { Name = "MiddleMiddleRight" },
+                    new Tile { Name = "MiddleBottomLeft" },
+                    new Tile { Name = "MiddleBottomMiddle" },
+                    new Tile { Name = "MiddleBottomRight" },
+                    // Inner
+                    new Tile { Name = "InnerTopLeft" },
+                    new Tile { Name = "InnerTopMiddle" },
+                    new Tile { Name = "InnerTopRight" },
+                    new Tile { Name = "InnerMiddleLeft" },
+                    new Tile { Name = "InnerMiddleRight" },
+                    new Tile { Name = "InnerBottomLeft" },
+                    new Tile { Name = "InnerBottomMiddle" },
+                    new Tile { Name = "InnerBottomRight" }
+                });
 
             // Make the connections
 
-            //// Outer Top
-            //Tiles["OuterTopLeft"].AdjacentTiles = new[] { Tiles["OuterTopMiddle"], Tiles["OuterLeftMiddle"] };
-            //Tiles["OuterTopMiddle"].AdjacentTiles = new[]
-            //{ Tiles["OuterTopLeft"], Tiles["OuterLeftRight"], Tiles["MiddleTopMiddle"] };
-            //Tiles["OuterTopRight"].AdjacentTiles = new[] { Tiles["OuterTopMiddle"], Tiles["OuterRightMiddle"] };
-            //// Outer Middle
-            //Tiles["OuterMiddleLeft"].AdjacentTiles = new[]
-            //{ Tiles["OuterTopLeft"], Tiles["OuterBottomLeft"], Tiles["MiddleMiddleLeft"] };
-            //Tiles["OuterMiddleRight"].AdjacentTiles = new[]
-            //{ Tiles["OuterTopLeft"], Tiles["OuterLeftRight"], Tiles["InnerTopMiddle"] };
-            //// Outer Bottom
-            //Tiles["OuterBottomLeft"].AdjacentTiles = new[] { Tiles["OuterMiddleLeft"], Tiles["OuterBottomMiddle"] };
-            //Tiles["OuterBottomMiddle"].AdjacentTiles = new[]
-            //{ Tiles["OuterBottomLeft"], Tiles["OuterBottomRight"], Tiles["MiddleBottomMiddle"] };
-            //Tiles["OuterBottomRight"].AdjacentTiles = new[] { Tiles["OuterBottomMiddle"], Tiles["OuterRightMiddle"] };
-            //// ...
-            //// TODO
+            // Outer Top
+            Tiles[0].AdjacentTiles = new Tile[] { Tiles[1], Tiles[2] };
+            Tiles[1].AdjacentTiles = new Tile[] { Tiles[0], Tiles[3], Tiles[8] };
+            Tiles[2].AdjacentTiles = new Tile[] { Tiles[1], Tiles[4] };
+
+            // ...
+            // TODO
 
             this.RaisePropertyChanged(x => x.Tiles);
         }

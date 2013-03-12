@@ -30,9 +30,9 @@
             <ColumnDefinition Width="{StaticResource OuterWidth}" />
         </Grid.ColumnDefinitions>
         
-        <Ellipse Grid.Row="{Binding Path=Game.Tiles[OuterTopRight].Row}"
-                 Grid.Column="{Binding Path=Game.Tiles[OuterTopRight].Column}"
-                 Fill="{Binding Game.Tiles[OuterTopRight].FillColor}"
+        <Ellipse Grid.Row="{Binding Path=Game.Tiles[2].Row}"
+                 Grid.Column="{Binding Path=Game.Tiles[2].Column}"
+                 Fill="{Binding Game.Tiles[2].FillColor}"
                  Stroke ="{StaticResource TileStroke}"></Ellipse>
         
         <!-- Outer Rectangle -->
