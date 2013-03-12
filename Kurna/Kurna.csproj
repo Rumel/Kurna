@@ -108,7 +108,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Tile.cs" />
     <Compile Include="ViewModels\BoardViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

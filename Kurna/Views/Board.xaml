@@ -30,34 +30,41 @@
             <ColumnDefinition Width="{StaticResource OuterWidth}" />
         </Grid.ColumnDefinitions>
         
+        <Ellipse Grid.Row="{Binding Path=Game.Tiles[OuterTopRight].Row}"
+                 Grid.Column="{Binding Path=Game.Tiles[OuterTopRight].Column}"
+                 Fill="{Binding Game.Tiles[OuterTopRight].FillColor}"
+                 Stroke ="{StaticResource TileStroke}"></Ellipse>
+        
         <!-- Outer Rectangle -->
-        <Ellipse Name="OuterTopLeft" Grid.Row="0" Grid.Column="0" Fill="{Binding OuterTopLeftFill}" Stroke="{StaticResource TileStroke}" />
+        <!--<Ellipse Name="OuterTopLeft" Grid.Row="0" Grid.Column="0"
+                 Fill="{Binding Path=Game.Tiles[OuterTopLeft].FillColor}"
+                 Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="OuterTopMiddle" Grid.Row="0" Grid.Column="3" Fill="{Binding OuterTopMiddleFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="OuterTopRight" Grid.Row="0" Grid.Column="6" Fill="{Binding OuterTopRightFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="OuterMiddleLeft" Grid.Row="3" Grid.Column="0" Fill="{Binding OuterMiddleLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="OuterMiddleRight" Grid.Row="3" Grid.Column="6" Fill="{Binding OuterMiddleRightFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="OuterBottomLeft" Grid.Row="6" Grid.Column="0" Fill="{Binding OuterBottomLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="OuterBottomMiddle" Grid.Row="6" Grid.Column="3" Fill="{Binding OuterBottomMiddleFill}" Stroke="{StaticResource TileStroke}" />
-        <Ellipse Name="OuterBottomRight" Grid.Row="6" Grid.Column="6" Fill="{Binding OuterBottomRightFill}" Stroke="{StaticResource TileStroke}" />
+        <Ellipse Name="OuterBottomRight" Grid.Row="6" Grid.Column="6" Fill="{Binding OuterBottomRightFill}" Stroke="{StaticResource TileStroke}" />-->
 
         <!-- Middle Rectangle -->
-        <Ellipse Name="MiddleTopLeft" Grid.Row="1" Grid.Column="1" Fill="{Binding MiddleTopLeftFill}" Stroke="{StaticResource TileStroke}" />
+        <!--<Ellipse Name="MiddleTopLeft" Grid.Row="1" Grid.Column="1" Fill="{Binding MiddleTopLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="MiddleTopMiddle" Grid.Row="1" Grid.Column="3" Fill="{Binding MiddleTopMiddleFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="MiddleTopRight" Grid.Row="1" Grid.Column="5" Fill="{Binding MiddleTopRightFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="MiddleMiddleLeft" Grid.Row="3" Grid.Column="1" Fill="{Binding MiddleMiddleLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="MiddleMiddleRight" Grid.Row="3" Grid.Column="5" Fill="{Binding MiddleMiddleRightFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="MiddleBottomLeft" Grid.Row="5" Grid.Column="1" Fill="{Binding MiddleBottomLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="MiddleBottomMiddle" Grid.Row="5" Grid.Column="3" Fill="{Binding MiddleBottomMiddleFill}" Stroke="{StaticResource TileStroke}" />
-        <Ellipse Name="MiddleBottomRight" Grid.Row="5" Grid.Column="5" Fill="{Binding MiddleBottomRightFill}" Stroke="{StaticResource TileStroke}" />
+        <Ellipse Name="MiddleBottomRight" Grid.Row="5" Grid.Column="5" Fill="{Binding MiddleBottomRightFill}" Stroke="{StaticResource TileStroke}" />-->
 
         <!-- Inner Rectangle -->
-        <Ellipse Name="InnerTopLeft" Grid.Row="2" Grid.Column="2" Fill="{Binding InnerTopLeftFill}" Stroke="{StaticResource TileStroke}" />
+        <!--<Ellipse Name="InnerTopLeft" Grid.Row="2" Grid.Column="2" Fill="{Binding InnerTopLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="InnerTopMiddle" Grid.Row="2" Grid.Column="3" Fill="{Binding InnerTopMiddleFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="InnerTopRight" Grid.Row="2" Grid.Column="4" Fill="{Binding InnerTopRightFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="InnerMiddleLeft" Grid.Row="3" Grid.Column="2" Fill="{Binding InnerMiddleLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="InnerMiddleRight" Grid.Row="3" Grid.Column="4" Fill="{Binding InnerMiddleRightFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="InnerBottomLeft" Grid.Row="4" Grid.Column="2" Fill="{Binding InnerBottomLeftFill}" Stroke="{StaticResource TileStroke}" />
         <Ellipse Name="InnerBottomMiddle" Grid.Row="4" Grid.Column="3" Fill="{Binding InnerBottomMiddleFill}" Stroke="{StaticResource TileStroke}" />
-        <Ellipse Name="InnerBottomRight" Grid.Row="4" Grid.Column="4" Fill="{Binding InnerBottomRightFill}" Stroke="{StaticResource TileStroke}" />
+        <Ellipse Name="InnerBottomRight" Grid.Row="4" Grid.Column="4" Fill="{Binding InnerBottomRightFill}" Stroke="{StaticResource TileStroke}" />-->
     </Grid>
 </UserControl>
