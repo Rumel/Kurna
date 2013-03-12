@@ -18,7 +18,7 @@ namespace Kurna.ViewModels
             {
                 if (_CurrentControl == null)
                 {
-                    _CurrentControl = new BoardPage();
+                    _CurrentControl = new HomePage();
                 }
                 return _CurrentControl;
             }

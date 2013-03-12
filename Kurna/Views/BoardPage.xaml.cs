@@ -23,7 +23,6 @@ namespace Kurna.Views
         public BoardPage()
         {
             InitializeComponent();
-            this.DataContext = ViewModels.ViewModelLocator.BoardViewModel;
         }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="540" d:DesignWidth="540">
+             d:DesignHeight="540" d:DesignWidth="540" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=BoardViewModel}">
     <UserControl.Resources>
         <GridLength x:Key="OuterWidth">64</GridLength>
         <GridLength x:Key="OuterHeight">64</GridLength>
@@ -21,21 +21,21 @@
             <ColumnDefinition Width="{StaticResource OuterWidth}" />
         </Grid.ColumnDefinitions>
         <!-- OuterTopLeft -->
-        <Rectangle Name="OuterTopLeft" Grid.Row="0" Grid.Column="0" Fill="Black" />
+        <Rectangle Name="OuterTopLeft" Grid.Row="0" Grid.Column="0" Fill="{Binding OuterTopLeftFill}" />
         <!-- OuterTopMiddle -->
-        <Rectangle Name="OuterTopMiddle" Grid.Row="0" Grid.Column="1" Fill="Black" />
+        <Rectangle Name="OuterTopMiddle" Grid.Row="0" Grid.Column="1" Fill="{Binding OuterTopMiddleFill}" />
         <!-- OuterTopRight -->
-        <Rectangle Name="OuterTopRight" Grid.Row="0" Grid.Column="2" Fill="Black" />
+        <Rectangle Name="OuterTopRight" Grid.Row="0" Grid.Column="2" Fill="{Binding OuterTopRightFill}" />
         <!-- OuterMiddleLeft -->
-        <Rectangle Name="OuterMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="Black" />
+        <Rectangle Name="OuterMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="{Binding OuterMiddleLeftFill}" />
         <!-- OuterMiddleRight -->
-        <Rectangle Name="OuterMiddleRight" Grid.Row="1" Grid.Column="2" Fill="Black" />
+        <Rectangle Name="OuterMiddleRight" Grid.Row="1" Grid.Column="2" Fill="{Binding OuterMiddleRightFill}" />
         <!-- OuterBottomLeft -->
-        <Rectangle Name="OuterBottomLeft" Grid.Row="2" Grid.Column="0" Fill="Black" />
+        <Rectangle Name="OuterBottomLeft" Grid.Row="2" Grid.Column="0" Fill="{Binding OuterBottomLeftFill}" />
         <!-- OuterBottomMiddle -->
-        <Rectangle Name="OuterBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="Black" />
+        <Rectangle Name="OuterBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="{Binding OuterBottomMiddleFill}" />
         <!-- OuterBottomRight -->
-        <Rectangle Name="OuterBottomRight" Grid.Row="2" Grid.Column="2" Fill="Black" />
+        <Rectangle Name="OuterBottomRight" Grid.Row="2" Grid.Column="2" Fill="{Binding OuterBottomRightFill}" />
         
         <!-- Inner Board -->
         <Grid Grid.Row="1" Grid.Column="1">
@@ -50,21 +50,21 @@
                 <ColumnDefinition Width="{StaticResource OuterWidth}" />
             </Grid.ColumnDefinitions>
             <!-- MiddleTopLeft -->
-            <Rectangle Name="MiddleTopLeft" Grid.Row="0" Grid.Column="0" Fill="Black" />
+            <Rectangle Name="MiddleTopLeft" Grid.Row="0" Grid.Column="0" Fill="{Binding MiddleTopLeftFill}" />
             <!-- OuterTopMiddle -->
-            <Rectangle Name="MiddleTopMiddle" Grid.Row="0" Grid.Column="1" Fill="Black" />
+            <Rectangle Name="MiddleTopMiddle" Grid.Row="0" Grid.Column="1" Fill="{Binding MiddleTopMiddleFill}" />
             <!-- MiddleTopRight -->
-            <Rectangle Name="MiddleTopRight" Grid.Row="0" Grid.Column="2" Fill="Black" />
+            <Rectangle Name="MiddleTopRight" Grid.Row="0" Grid.Column="2" Fill="{Binding MiddleTopRightFill}" />
             <!-- MiddleMiddleLeft -->
-            <Rectangle Name="MiddleMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="Black" />
+            <Rectangle Name="MiddleMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="{Binding MiddleMiddleLeftFill}" />
             <!-- MiddleMiddleRight -->
-            <Rectangle Name="MiddleMiddleRight" Grid.Row="1" Grid.Column="2" Fill="Black" />
+            <Rectangle Name="MiddleMiddleRight" Grid.Row="1" Grid.Column="2" Fill="{Binding MiddleMiddleRightFill}" />
             <!-- MiddleBottomLeft -->
-            <Rectangle Name="MiddleBottomLeft" Grid.Row="2" Grid.Column="0" Fill="Black" />
+            <Rectangle Name="MiddleBottomLeft" Grid.Row="2" Grid.Column="0" Fill="{Binding MiddleBottomLeftFill}" />
             <!-- MiddleBottomMiddle -->
-            <Rectangle Name="MiddleBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="Black" />
+            <Rectangle Name="MiddleBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="{Binding MiddleBottomMiddleFill}" />
             <!-- MiddleBottomRight -->
-            <Rectangle Name="MiddleBottomRight" Grid.Row="2" Grid.Column="2" Fill="Black" />
+            <Rectangle Name="MiddleBottomRight" Grid.Row="2" Grid.Column="2" Fill="{Binding MiddleBottomRightFill}" />
             
             <!-- Innermost Board -->
             <Grid Grid.Row="1" Grid.Column="1">
@@ -80,21 +80,21 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- InnerTopLeft -->
-                <Rectangle Name="InnerTopLeft" Grid.Row="0" Grid.Column="0" Fill="Black" />
+                <Rectangle Name="InnerTopLeft" Grid.Row="0" Grid.Column="0" Fill="{Binding InnerTopLeftFill}" />
                 <!-- InnerTopMiddle -->
-                <Rectangle Name="InnerTopMiddle" Grid.Row="0" Grid.Column="1" Fill="Black" />
+                <Rectangle Name="InnerTopMiddle" Grid.Row="0" Grid.Column="1" Fill="{Binding InnerTopMiddleFill}" />
                 <!-- InnerTopRight -->
-                <Rectangle Name="InnerTopRight" Grid.Row="0" Grid.Column="2" Fill="Black" />
+                <Rectangle Name="InnerTopRight" Grid.Row="0" Grid.Column="2" Fill="{Binding InnerTopRightFill}" />
                 <!-- InnerMiddleLeft -->
-                <Rectangle Name="InnerMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="Black" />
+                <Rectangle Name="InnerMiddleLeft" Grid.Row="1" Grid.Column="0" Fill="{Binding InnerMiddleLeftFill}" />
                 <!--InnerMiddleRight -->
-                <Rectangle Name="InnerMiddleRight" Grid.Row="1" Grid.Column="2" Fill="Black" />
+                <Rectangle Name="InnerMiddleRight" Grid.Row="1" Grid.Column="2" Fill="{Binding InnerMiddleRightFill}" />
                 <!-- InnerBottomLeft -->
-                <Rectangle Name="InnerBottomLeft" Grid.Row="2" Grid.Column="0" Fill="Black" />
+                <Rectangle Name="InnerBottomLeft" Grid.Row="2" Grid.Column="0" Fill="{Binding InnerBottomLeftFill}" />
                 <!-- InnerBottomMiddle -->
-                <Rectangle Name="InnerBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="Black" />
+                <Rectangle Name="InnerBottomMiddle" Grid.Row="2" Grid.Column="1" Fill="{Binding InnerBottomMiddleFill}" />
                 <!-- InnerBottomRight -->
-                <Rectangle Name="InnerBottomRight" Grid.Row="2" Grid.Column="2" Fill="Black" />
+                <Rectangle Name="InnerBottomRight" Grid.Row="2" Grid.Column="2" Fill="{Binding InnerBottomRightFill}" />
             </Grid>
         </Grid>
     </Grid>
