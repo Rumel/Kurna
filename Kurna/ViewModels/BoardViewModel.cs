@@ -11,6 +11,12 @@ namespace Kurna.ViewModels
 {
     public class BoardViewModel : ReactiveObject
     {
+        public BoardViewModel()
+        {
+            this.OuterBottomLeft = TileStatus.Empty;
+            this.InnerBottomLeftFill = Brushes.Red;
+        }
+
         #region Players
         private Player _PlayerOne = null;
         public Player PlayerOne
@@ -498,6 +504,7 @@ namespace Kurna.ViewModels
         }
 
         private Brush _InnerBottomRightFill = Brushes.Black;
+
         public Brush InnerBottomRightFill
         {
             get
