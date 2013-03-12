@@ -16,20 +16,13 @@ using System.Windows.Shapes;
 namespace Kurna.Views
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for TraditionalBoard.xaml
     /// </summary>
-    public partial class HomePage : UserControl
+    public partial class TraditionalBoard : UserControl
     {
-        public HomePage()
+        public TraditionalBoard()
         {
             InitializeComponent();
-        }
-
-        private void NewGame(object sender, RoutedEventArgs e)
-        {
-            //ViewModels.ViewModelLocator.MainWindowViewModel.CurrentControl = new Views.BoardPage();
-            var boardPage = new BoardPage();
-            this.Content = boardPage;
         }
     }
 }
