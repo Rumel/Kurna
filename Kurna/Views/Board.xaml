@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <GridLength x:Key="OuterWidth">64</GridLength>
         <GridLength x:Key="OuterHeight">64</GridLength>
-        <SolidColorBrush x:Key="TileStroke">White</SolidColorBrush>
+        <SolidColorBrush x:Key="TileStroke">Black</SolidColorBrush>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>

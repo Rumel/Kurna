@@ -11,21 +11,30 @@ namespace Kurna.ViewModels
 {
     public class BoardViewModel : ReactiveObject
     {
+        private static readonly Brush defaultTileFill = Brushes.White;
+
         public BoardViewModel()
         {
-            this.OuterBottomLeft = TileStatus.Empty;
-            this.InnerBottomLeftFill = Brushes.Red;
+            PlayerOne = new Player
+            {
+                IsPlayersTurn = true
+            };
+            PlayerTwo = new Player
+            {
+                IsPlayersTurn = false
+            };
         }
 
         #region Players
-        private Player _PlayerOne = null;
+
+        private Player _PlayerOne;
         public Player PlayerOne
         {
             get { return _PlayerOne; }
             set { this.RaiseAndSetIfChanged(x => x.PlayerOne, value); }
         }
 
-        private Player _PlayerTwo = null;
+        private Player _PlayerTwo;
         public Player PlayerTwo
         {
             get { return _PlayerTwo; }
@@ -41,7 +50,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterTopLeft, value); }
         }
 
-        private Brush _OuterTopLeftFill = Brushes.Black;
+        private Brush _OuterTopLeftFill = defaultTileFill;
         public Brush OuterTopLeftFill
         {
             get {
@@ -59,7 +68,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterTopMiddle, value); }
         }
 
-        private Brush _OuterTopMiddleFill = Brushes.Black;
+        private Brush _OuterTopMiddleFill = defaultTileFill;
         public Brush OuterTopMiddleFill
         {
             get
@@ -79,7 +88,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterTopRight, value); }
         }
 
-        private Brush _OuterTopRightFill = Brushes.Black;
+        private Brush _OuterTopRightFill = defaultTileFill;
         public Brush OuterTopRightFill
         {
             get
@@ -99,7 +108,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterMiddleLeft, value); }
         }
 
-        private Brush _OuterMiddleLeftFill = Brushes.Black;
+        private Brush _OuterMiddleLeftFill = defaultTileFill;
         public Brush OuterMiddleLeftFill
         {
             get
@@ -119,7 +128,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterMiddleRight, value); }
         }
 
-        private Brush _OuterMiddleRightFill = Brushes.Black;
+        private Brush _OuterMiddleRightFill = defaultTileFill;
         public Brush OuterMiddleRightFill
         {
             get
@@ -139,7 +148,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterBottomLeft, value); }
         }
 
-        private Brush _OuterBottomLeftFill = Brushes.Black;
+        private Brush _OuterBottomLeftFill = defaultTileFill;
         public Brush OuterBottomLeftFill
         {
             get
@@ -159,7 +168,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterBottomMiddle, value); }
         }
 
-        private Brush _OuterBottomMiddleFill = Brushes.Black;
+        private Brush _OuterBottomMiddleFill = defaultTileFill;
         public Brush OuterBottomMiddleFill
         {
             get
@@ -179,7 +188,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.OuterBottomRight, value); }
         }
 
-        private Brush _OuterBottomRightFill = Brushes.Black;
+        private Brush _OuterBottomRightFill = defaultTileFill;
         public Brush OuterBottomRightFill
         {
             get
@@ -201,7 +210,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleTopLeft, value); }
         }
 
-        private Brush _MiddleTopLeftFill = Brushes.Black;
+        private Brush _MiddleTopLeftFill = defaultTileFill;
         public Brush MiddleTopLeftFill
         {
             get
@@ -221,7 +230,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleTopMiddle, value); }
         }
 
-        private Brush _MiddleTopMiddleFill = Brushes.Black;
+        private Brush _MiddleTopMiddleFill = defaultTileFill;
         public Brush MiddleTopMiddleFill
         {
             get
@@ -241,7 +250,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleTopRight, value); }
         }
 
-        private Brush _MiddleTopRightFill = Brushes.Black;
+        private Brush _MiddleTopRightFill = defaultTileFill;
         public Brush MiddleTopRightFill
         {
             get
@@ -261,7 +270,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleMiddleLeft, value); }
         }
 
-        private Brush _MiddleMiddleLeftFill = Brushes.Black;
+        private Brush _MiddleMiddleLeftFill = defaultTileFill;
         public Brush MiddleMiddleLeftFill
         {
             get
@@ -281,7 +290,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleMiddleRight, value); }
         }
 
-        private Brush _MiddleMiddleRightFill = Brushes.Black;
+        private Brush _MiddleMiddleRightFill = defaultTileFill;
         public Brush MiddleMiddleRightFill
         {
             get
@@ -301,7 +310,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleBottomLeft, value); }
         }
 
-        private Brush _MiddleBottomLeftFill = Brushes.Black;
+        private Brush _MiddleBottomLeftFill = defaultTileFill;
         public Brush MiddleBottomLeftFill
         {
             get
@@ -321,7 +330,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleBottomMiddle, value); }
         }
 
-        private Brush _MiddleBottomMiddleFill = Brushes.Black;
+        private Brush _MiddleBottomMiddleFill = defaultTileFill;
         public Brush MiddleBottomMiddleFill
         {
             get
@@ -341,7 +350,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.MiddleBottomRight, value); }
         }
 
-        private Brush _MiddleBottomRightFill = Brushes.Black;
+        private Brush _MiddleBottomRightFill = defaultTileFill;
         public Brush MiddleBottomRightFill
         {
             get
@@ -363,7 +372,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerTopLeft, value); }
         }
 
-        private Brush _InnerTopLeftFill = Brushes.Black;
+        private Brush _InnerTopLeftFill = defaultTileFill;
         public Brush InnerTopLeftFill
         {
             get
@@ -383,7 +392,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerTopMiddle, value); }
         }
 
-        private Brush _InnerTopMiddleFill = Brushes.Black;
+        private Brush _InnerTopMiddleFill = defaultTileFill;
         public Brush InnerTopMiddleFill
         {
             get
@@ -403,7 +412,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerTopRight, value); }
         }
 
-        private Brush _InnerTopRightFill = Brushes.Black;
+        private Brush _InnerTopRightFill = defaultTileFill;
         public Brush InnerTopRightFill
         {
             get
@@ -423,7 +432,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerMiddleLeft, value); }
         }
 
-        private Brush _InnerMiddleLeftFill = Brushes.Black;
+        private Brush _InnerMiddleLeftFill = defaultTileFill;
         public Brush InnerMiddleLeftFill
         {
             get
@@ -443,7 +452,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerMiddleRight, value); }
         }
 
-        private Brush _InnerMiddleRightFill = Brushes.Black;
+        private Brush _InnerMiddleRightFill = defaultTileFill;
         public Brush InnerMiddleRightFill
         {
             get
@@ -463,7 +472,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerBottomLeft, value); }
         }
 
-        private Brush _InnerBottomLeftFill = Brushes.Black;
+        private Brush _InnerBottomLeftFill = defaultTileFill;
         public Brush InnerBottomLeftFill
         {
             get
@@ -483,7 +492,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerBottomMiddle, value); }
         }
 
-        private Brush _InnerBottomMiddleFill = Brushes.Black;
+        private Brush _InnerBottomMiddleFill = defaultTileFill;
         public Brush InnerBottomMiddleFill
         {
             get
@@ -503,7 +512,7 @@ namespace Kurna.ViewModels
             set { this.RaiseAndSetIfChanged(x => x.InnerBottomRight, value); }
         }
 
-        private Brush _InnerBottomRightFill = Brushes.Black;
+        private Brush _InnerBottomRightFill = defaultTileFill;
 
         public Brush InnerBottomRightFill
         {
