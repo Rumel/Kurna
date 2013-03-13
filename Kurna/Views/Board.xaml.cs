@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -26,6 +27,7 @@ namespace Kurna.Views
             var game = ViewModelLocator.GameViewModel.Game;
             var players = ViewModelLocator.PlayerViewModel;
             var tile = game.Tiles.FirstOrDefault(t => ellipse.Tag as string == t.TileName);
+            if (tile == null) return;
             if (game.State == GameState.Placing)
             {
                 if (tile.Status != TileStatus.Unoccupied)
@@ -47,25 +49,19 @@ namespace Kurna.Views
                 }
                 else if (players.PlayerTwo.IsPlayersTurn)
                 {
-                    if (players.PlayerTwo.PiecesLeft == 0)
-                    {
-                        game.State = GameState.Moving;
-                    }
-                    else
-                    {
                         tile.Status = TileStatus.P2;
-                        players.PlayerTwo.PiecesLeft--;
+                        if (players.PlayerTwo.PiecesLeft-- == 0)
+                            game.State = GameState.Moving;
                         players.SwitchTurns();
-                    }
                 }
             }
-
-            //var tiles = ellipse.Tag as IEnumerable<Tile>;
-            //if (tiles != null)
-            //    foreach (var tile in tiles)
-            //    {
-            //        tile.ShowIsAvailable();
-            //    }
+            else if (game.State == GameState.Moving)
+            {
+                foreach (var t in tile.AdjacentTiles.Where(x => x.Status == TileStatus.Unoccupied))
+                {
+                    t.ShowIsAvailable();
+                }
+            }
         }
 
         private void ShowUnavailable(object sender, MouseButtonEventArgs e)
