@@ -18,9 +18,9 @@ namespace Kurna.Views
     /// <summary>
     /// Interaction logic for BoardPage.xaml
     /// </summary>
-    public partial class BoardPage : UserControl
+    public partial class GamePage : UserControl
     {
-        public BoardPage()
+        public GamePage()
         {
             InitializeComponent();
         }

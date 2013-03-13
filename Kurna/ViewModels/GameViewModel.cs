@@ -4,12 +4,12 @@ using System.Windows.Media;
 
 namespace Kurna.ViewModels
 {
-    public class BoardViewModel : ReactiveObject
+    public class GameViewModel : ReactiveObject
     {
         private static readonly Brush DefaultTileFill = Brushes.White;
         private Game game;
 
-        public BoardViewModel()
+        public GameViewModel()
         {
             Game = new PvpGame();
         }

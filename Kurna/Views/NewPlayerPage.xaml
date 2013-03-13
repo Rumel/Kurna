@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Kurna.Views.NewPlayerPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="640" Width="800" Background="DimGray">
+        Height="640" Width="800" Background="DimGray" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=PlayerViewModel}">
     <UserControl.Resources>
         <Style x:Key="NameTextBoxStyle" TargetType="{x:Type TextBox}">
             <Style.Setters>
@@ -59,9 +59,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Player One" Style="{StaticResource TextBlockStyle}"/>
-        <TextBox Grid.Row="1" Text="" Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
+        <TextBox Grid.Row="1" Text="{Binding PlayerOne.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
         <TextBlock Grid.Row="2" Text="Player Two" Style="{StaticResource TextBlockStyle}"/>
-        <TextBox Grid.Row="3" Text="" Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
+        <TextBox Grid.Row="3" Text="{Binding PlayerTwo.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

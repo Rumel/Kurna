@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Kurna.Views.BoardPage"
+﻿<UserControl x:Class="Kurna.Views.GamePage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,16 +11,7 @@
             <RowDefinition Height="96" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <!-- Player One -->
-            <TextBlock Grid.Column="0" Text="Player 1" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold" Background="{Binding }"/>
-            <!-- Player Two -->
-            <TextBlock Grid.Column="1" Text="Player 2" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold"/>
-        </Grid>
+        <views:PlayerHeader Grid.Row="0"/>
         <views:Board Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
         </views:Board>
     </Grid>
