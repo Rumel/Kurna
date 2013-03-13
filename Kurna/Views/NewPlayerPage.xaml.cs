@@ -10,25 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Kurna.Views
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for NewPlayerPage.xaml
     /// </summary>
-    public partial class HomePage : UserControl
+    public partial class NewPlayerPage : UserControl
     {
-        public HomePage()
+        public NewPlayerPage()
         {
             InitializeComponent();
         }
 
-        private void NewGame(object sender, RoutedEventArgs e)
+        private void NextButtonClick(object sender, RoutedEventArgs e)
         {
-            var newPlayerPage = new NewPlayerPage();
-            this.Content = newPlayerPage;
+            //TODO: Add validation checking
+            var boardPage = new BoardPage();
+            this.Content = boardPage;
         }
     }
 }
