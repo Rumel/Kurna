@@ -27,20 +27,20 @@ namespace Kurna.ViewModels
             }
         }
 
-        private static BoardViewModel _boardViewModel = null;
-        public static BoardViewModel BoardViewModel
+        private static GameViewModel _gameViewModel = null;
+        public static GameViewModel GameViewModel
         {
             get
             {
-                if (_boardViewModel == null)
+                if (_gameViewModel == null)
                 {
-                    _boardViewModel = new BoardViewModel();
+                    _gameViewModel = new GameViewModel();
                 }
-                return _boardViewModel;
+                return _gameViewModel;
             }
             set
             {
-                _boardViewModel = value;
+                _gameViewModel = value;
             }
         }
 
@@ -58,6 +58,23 @@ namespace Kurna.ViewModels
             set
             {
                 _mainWindowViewModel = value;
+            }
+        }
+
+        public static PlayerViewModel _PlayerViewModel = null;
+        public static PlayerViewModel PlayerViewModel
+        {
+            get
+            {
+                if (_PlayerViewModel == null)
+                {
+                    _PlayerViewModel = new PlayerViewModel();
+                }
+                return _PlayerViewModel;
+            }
+            set
+            {
+                _PlayerViewModel = value;
             }
         }
     }

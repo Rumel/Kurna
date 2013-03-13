@@ -5,8 +5,6 @@ namespace Kurna.Models
 {
     public abstract class Game : ReactiveObject
     {
-        private Player playerOne;
-        private Player playerTwo;
         private GameState state;
         private ReactiveCollection<Tile> tiles;
 
@@ -19,18 +17,6 @@ namespace Kurna.Models
         {
             get { return state; }
             set { this.RaiseAndSetIfChanged(ref state, value); }
-        }
-
-        public Player PlayerOne
-        {
-            get { return playerOne; }
-            set { this.RaiseAndSetIfChanged(ref playerOne, value); }
-        }
-
-        public Player PlayerTwo
-        {
-            get { return playerTwo; }
-            set { this.RaiseAndSetIfChanged(ref playerTwo, value); }
         }
 
         public ReactiveCollection<Tile> Tiles
@@ -92,8 +78,6 @@ namespace Kurna.Models
     {
         public PvpGame()
         {
-            PlayerOne = new Player { IsPlayersTurn = true };
-            PlayerTwo = new Player { IsPlayersTurn = false };
         }
     }
 }
