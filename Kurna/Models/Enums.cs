@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kurna.Models
+﻿namespace Kurna.Models
 {
     public enum TileStatus
     {
-        Black,
-        White,
-        Empty
+        Unoccupied,
+        P1,
+        P2
+    }
+
+    public enum GameState
+    {
+        Placing,
+        Moving,
+        Flying
     }
 }
