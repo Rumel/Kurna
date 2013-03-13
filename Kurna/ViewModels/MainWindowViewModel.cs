@@ -6,11 +6,11 @@ namespace Kurna.ViewModels
 {
     public class MainWindowViewModel : ReactiveObject
     {
-        private UserControl _CurrentControl = new HomePage();
+        private UserControl currentControl = new HomePage();
         public UserControl CurrentControl
         {
-            get { return _CurrentControl; }
-            set {this.RaiseAndSetIfChanged(ref _CurrentControl, value); }
+            get { return currentControl; }
+            set {this.RaiseAndSetIfChanged(ref currentControl, value); }
         }
     }
 }

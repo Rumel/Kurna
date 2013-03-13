@@ -6,7 +6,7 @@ namespace Kurna.Models
 {
     public class Tile : ReactiveObject
     {
-        public static readonly Brush UnoccupiedColor = Brushes.Green;
+        public static readonly Brush UnoccupiedColor = Brushes.White;
         public static readonly Brush P1Color = Brushes.Aqua;
         public static readonly Brush P2Color = Brushes.BlueViolet;
         private Brush fillColor;
