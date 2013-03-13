@@ -10,7 +10,14 @@ namespace Kurna.Models
         public static readonly Brush P1Color = Brushes.Aqua;
         public static readonly Brush P2Color = Brushes.BlueViolet;
         private Brush fillColor;
+        private int strokeThickness;
         private TileStatus tileStatus;
+
+        public Tile()
+        {
+            Status = TileStatus.Unoccupied;
+            StrokeThickness = 0;
+        }
 
         public TileStatus Status
         {
@@ -22,10 +29,25 @@ namespace Kurna.Models
             get { return fillColor; }
             set { this.RaiseAndSetIfChanged(ref fillColor, value); }
         }
-        public string Name { get; set; }
+        public int StrokeThickness
+        {
+            get { return strokeThickness; }
+            set { this.RaiseAndSetIfChanged(ref strokeThickness, value); }
+        }
+        public string TileName { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
         public IEnumerable<Tile> AdjacentTiles { get; set; }
+
+        public void ShowIsAvailable()
+        {
+            StrokeThickness = 5;
+        }
+
+        public void ShowIsUnavailable()
+        {
+            StrokeThickness = 0;
+        }
 
         private void OnTileStatusChanged(TileStatus value)
         {
@@ -36,11 +58,6 @@ namespace Kurna.Models
             if (value == TileStatus.P2)
                 FillColor = P2Color;
             this.RaiseAndSetIfChanged(ref tileStatus, value);
-        }
-
-        public Tile()
-        {
-            Status = TileStatus.Unoccupied;
         }
     }
 }

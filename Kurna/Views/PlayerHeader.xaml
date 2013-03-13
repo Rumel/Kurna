@@ -12,7 +12,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="64" />
-            <Setter Property="Foreground" Value="Black" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -20,7 +19,9 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Text="{Binding PlayerOne.Name}" Style="{StaticResource NameTextBlock}"/>
-        <TextBlock Grid.Column="1" Text="{Binding PlayerTwo.Name}" Style="{StaticResource NameTextBlock}"/>
+        <TextBlock Grid.Column="0" Text="{Binding PlayerOne.Name}" Style="{StaticResource NameTextBlock}"
+                   Foreground ="{Binding PlayerOne.Background}"/>
+        <TextBlock Grid.Column="1" Text="{Binding PlayerTwo.Name}" Style="{StaticResource NameTextBlock}"
+                   Foreground ="{Binding PlayerTwo.Background}"/>
     </Grid>
 </UserControl>
