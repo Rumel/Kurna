@@ -15,8 +15,8 @@ namespace Kurna.Views
 
         private void NewGame(object sender, RoutedEventArgs e)
         {
-            var boardPage = new BoardPage();
-            Content = boardPage;
+            var newPlayerPage = new NewPlayerPage();
+            Content = newPlayerPage;
         }
     }
 }
