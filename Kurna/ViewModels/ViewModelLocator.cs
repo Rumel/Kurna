@@ -1,81 +1,46 @@
-﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kurna.ViewModels
+﻿namespace Kurna.ViewModels
 {
     public class ViewModelLocator
     {
-        private static HomePageViewModel _homePageViewModel = null;
-        public static HomePageViewModel HomePageViewModel
-        {
-            get
-            {
-                if (_homePageViewModel == null)
-                {
-                    _homePageViewModel = new HomePageViewModel();
-                }
-                return _homePageViewModel;
-            }
-            set
-            {
-                _homePageViewModel = value;
-            }
-        }
+        private static GameViewModel gameViewModel;
+        private static MainWindowViewModel mainWindowViewModel;
 
-        private static GameViewModel _gameViewModel = null;
+        public static PlayerViewModel playerViewModel;
         public static GameViewModel GameViewModel
         {
             get
             {
-                if (_gameViewModel == null)
+                if (gameViewModel == null)
                 {
-                    _gameViewModel = new GameViewModel();
+                    gameViewModel = new GameViewModel();
                 }
-                return _gameViewModel;
+                return gameViewModel;
             }
-            set
-            {
-                _gameViewModel = value;
-            }
+            set { gameViewModel = value; }
         }
-
-        private static MainWindowViewModel _mainWindowViewModel = null;
         public static MainWindowViewModel MainWindowViewModel
         {
             get
             {
-                if (_mainWindowViewModel == null)
+                if (mainWindowViewModel == null)
                 {
-                    _mainWindowViewModel = new MainWindowViewModel();
+                    mainWindowViewModel = new MainWindowViewModel();
                 }
-                return _mainWindowViewModel;
+                return mainWindowViewModel;
             }
-            set
-            {
-                _mainWindowViewModel = value;
-            }
+            set { mainWindowViewModel = value; }
         }
-
-        public static PlayerViewModel _PlayerViewModel = null;
         public static PlayerViewModel PlayerViewModel
         {
             get
             {
-                if (_PlayerViewModel == null)
+                if (playerViewModel == null)
                 {
-                    _PlayerViewModel = new PlayerViewModel();
+                    playerViewModel = new PlayerViewModel();
                 }
-                return _PlayerViewModel;
+                return playerViewModel;
             }
-            set
-            {
-                _PlayerViewModel = value;
-            }
+            set { playerViewModel = value; }
         }
     }
 }
