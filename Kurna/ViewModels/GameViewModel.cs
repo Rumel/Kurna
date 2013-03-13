@@ -1,6 +1,8 @@
-﻿using Kurna.Models;
+﻿using System;
+using Kurna.Models;
 using ReactiveUI;
 using System.Windows.Media;
+using ReactiveUI.Xaml;
 
 namespace Kurna.ViewModels
 {
@@ -11,7 +13,7 @@ namespace Kurna.ViewModels
 
         public GameViewModel()
         {
-            Game = new PvpGame();
+            Game = new Game();
         }
 
         public Game Game
@@ -19,5 +21,7 @@ namespace Kurna.ViewModels
             get { return game; }
             set { this.RaiseAndSetIfChanged(ref game, value); }
         }
+
+        public ReactiveCommand ClickTileToViewMoves { get; private set; }
     }
 }

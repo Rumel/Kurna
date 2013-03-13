@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Kurna.Models"
              mc:Ignorable="d" 
-             d:DesignHeight="448" d:DesignWidth="448" DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=GameViewModel}">
+             d:DesignHeight="448" d:DesignWidth="448"
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=GameViewModel}">
     <UserControl.Resources>
         <GridLength x:Key="OuterWidth">64</GridLength>
         <GridLength x:Key="OuterHeight">64</GridLength>
@@ -44,8 +45,21 @@
         </ItemsControl.ItemContainerStyle>
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type local:Tile}">
-                <Ellipse Fill="{Binding FillColor}"
-                         Stroke="{StaticResource TileStroke}"/>
+                <Ellipse Tag="{Binding TileName}" StrokeThickness="{Binding StrokeThickness}"
+                         Fill="{Binding FillColor}"
+                         Stroke="{StaticResource TileStroke}"
+                         MouseLeftButtonDown="Ellipse_MouseDown"
+                         MouseLeftButtonUp="ShowUnavailable"
+                         MouseLeave="ShowUnavailable2"
+                         MouseMove="ellipse_MouseMove"
+                         GiveFeedback="ellipse_GiveFeedback"
+                         AllowDrop="True"
+                         DragEnter="ellipse_DragEnter" DragLeave="ellipse_DragLeave"
+                         DragOver="ellipse_DragOver" Drop="ellipse_Drop">
+                        <!--<Ellipse.BitmapEffect>
+                            <OuterGlowBitmapEffect GlowColor="Black" GlowSize="80" />
+                        </Ellipse.BitmapEffect>-->
+                </Ellipse>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
