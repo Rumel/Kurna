@@ -3,13 +3,14 @@ using ReactiveUI;
 
 namespace Kurna.Models
 {
-    public abstract class Game : ReactiveObject
+    public class Game : ReactiveObject
     {
         private GameState state;
         private ReactiveCollection<Tile> tiles;
 
         public Game()
         {
+            state = GameState.Placing;
             CreateTiles();
         }
 
@@ -32,32 +33,32 @@ namespace Kurna.Models
                 new[]
                 {
                     // Outer
-                    new Tile { Name = "OuterTopLeft", Row = 0, Column = 0, Status = TileStatus.P1 },
-                    new Tile { Name = "OuterTopMiddle", Row = 0, Column = 3, Status = TileStatus.P2 },
-                    new Tile { Name = "OuterTopRight", Row = 0, Column = 6 },
-                    new Tile { Name = "OuterMiddleLeft", Row = 3, Column = 0, Status = TileStatus.P1 },
-                    new Tile { Name = "OuterMiddleRight", Row = 3, Column = 6 },
-                    new Tile { Name = "OuterBottomLeft", Row = 6, Column = 0 },
-                    new Tile { Name = "OuterBottomMiddle", Row = 6, Column = 3 },
-                    new Tile { Name = "OuterBottomRight", Row = 6, Column = 6 },
+                    new Tile { TileName = "OuterTopLeft", Row = 0, Column = 0 },
+                    new Tile { TileName = "OuterTopMiddle", Row = 0, Column = 3 },
+                    new Tile { TileName = "OuterTopRight", Row = 0, Column = 6 },
+                    new Tile { TileName = "OuterMiddleLeft", Row = 3, Column = 0 },
+                    new Tile { TileName = "OuterMiddleRight", Row = 3, Column = 6 },
+                    new Tile { TileName = "OuterBottomLeft", Row = 6, Column = 0 },
+                    new Tile { TileName = "OuterBottomMiddle", Row = 6, Column = 3 },
+                    new Tile { TileName = "OuterBottomRight", Row = 6, Column = 6 },
                     // Middle
-                    new Tile { Name = "MiddleTopLeft", Row = 1, Column = 1 },
-                    new Tile { Name = "MiddleTopMiddle", Row = 1, Column = 3 },
-                    new Tile { Name = "MiddleTopRight", Row = 1, Column = 5 },
-                    new Tile { Name = "MiddleMiddleLeft", Row = 3, Column = 1 },
-                    new Tile { Name = "MiddleMiddleRight", Row = 3, Column = 5 },
-                    new Tile { Name = "MiddleBottomLeft", Row = 5, Column = 1 },
-                    new Tile { Name = "MiddleBottomMiddle", Row = 5, Column = 3 },
-                    new Tile { Name = "MiddleBottomRight", Row = 5, Column = 5 },
+                    new Tile { TileName = "MiddleTopLeft", Row = 1, Column = 1 },
+                    new Tile { TileName = "MiddleTopMiddle", Row = 1, Column = 3 },
+                    new Tile { TileName = "MiddleTopRight", Row = 1, Column = 5 },
+                    new Tile { TileName = "MiddleMiddleLeft", Row = 3, Column = 1 },
+                    new Tile { TileName = "MiddleMiddleRight", Row = 3, Column = 5 },
+                    new Tile { TileName = "MiddleBottomLeft", Row = 5, Column = 1 },
+                    new Tile { TileName = "MiddleBottomMiddle", Row = 5, Column = 3 },
+                    new Tile { TileName = "MiddleBottomRight", Row = 5, Column = 5 },
                     // Inner
-                    new Tile { Name = "InnerTopLeft", Row = 2, Column = 2 },
-                    new Tile { Name = "InnerTopMiddle", Row = 2, Column = 3 },
-                    new Tile { Name = "InnerTopRight", Row = 2, Column = 4 },
-                    new Tile { Name = "InnerMiddleLeft", Row = 3, Column = 2 },
-                    new Tile { Name = "InnerMiddleRight", Row = 3, Column = 4 },
-                    new Tile { Name = "InnerBottomLeft", Row = 4, Column = 2 },
-                    new Tile { Name = "InnerBottomMiddle", Row = 4, Column = 3 },
-                    new Tile { Name = "InnerBottomRight", Row = 4, Column = 4 }
+                    new Tile { TileName = "InnerTopLeft", Row = 2, Column = 2 },
+                    new Tile { TileName = "InnerTopMiddle", Row = 2, Column = 3 },
+                    new Tile { TileName = "InnerTopRight", Row = 2, Column = 4 },
+                    new Tile { TileName = "InnerMiddleLeft", Row = 3, Column = 2 },
+                    new Tile { TileName = "InnerMiddleRight", Row = 3, Column = 4 },
+                    new Tile { TileName = "InnerBottomLeft", Row = 4, Column = 2 },
+                    new Tile { TileName = "InnerBottomMiddle", Row = 4, Column = 3 },
+                    new Tile { TileName = "InnerBottomRight", Row = 4, Column = 4 }
                 });
 
             // Make the connections
@@ -71,13 +72,6 @@ namespace Kurna.Models
             // TODO
 
             this.RaisePropertyChanged(x => x.Tiles);
-        }
-    }
-
-    public class PvpGame : Game
-    {
-        public PvpGame()
-        {
         }
     }
 }

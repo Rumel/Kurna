@@ -1,10 +1,5 @@
 ﻿using Kurna.Models;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kurna.ViewModels
 {
@@ -12,37 +7,22 @@ namespace Kurna.ViewModels
     {
         public PlayerViewModel()
         {
-            PlayerOne = new Player();
-            PlayerTwo = new Player();
-
-            //Player one always goes first
-            PlayerOne.IsPlayersTurn = true;
+            PlayerOne = new Player { IsPlayersTurn = true, Name = "Player 1" };
+            PlayerTwo = new Player { IsPlayersTurn = false, Name = "Player 2" };
         }
 
         private Player playerOne;
         public Player PlayerOne
         {
-            get
-            {
-                return playerOne;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref playerOne, value);
-            }
+            get { return playerOne; }
+            set { this.RaiseAndSetIfChanged(ref playerOne, value); }
         }
 
         private Player playerTwo;
         public Player PlayerTwo
         {
-            get
-            {
-                return playerTwo;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref playerTwo, value);
-            }
+            get { return playerTwo; }
+            set { this.RaiseAndSetIfChanged(ref playerTwo, value); }
         }
 
         public void SwitchTurns()

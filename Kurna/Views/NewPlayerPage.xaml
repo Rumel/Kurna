@@ -9,22 +9,24 @@
                 <Setter Property="Width" Value="540"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="Margin" Value="40,0,0,0"/>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontSize" Value="64" />
                 <Setter Property="FontWeight" Value="SemiBold"/>
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="TextAlignment" Value="Center"/>
             </Style.Setters>
         </Style>
         <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
             <Style.Setters>
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="FontSize" Value="48" />
+                <Setter Property="FontSize" Value="80" />
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="Margin" Value="20,0,0,0"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style.Setters>
         </Style>
         <Style x:Key="NextButtonStyle" TargetType="{x:Type Button}">
@@ -55,24 +57,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Player One" Style="{StaticResource TextBlockStyle}"/>
-        <TextBox Grid.Row="1" Text="{Binding PlayerOne.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
-        <TextBlock Grid.Row="2" Text="Player Two" Style="{StaticResource TextBlockStyle}"/>
-        <TextBox Grid.Row="3" Text="{Binding PlayerTwo.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="196" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Grid.Column="0">
-                <TextBlock Text="Is Player 2 Human?" Style="{StaticResource HumanTextBlockStyle}"/>
-                <CheckBox  Style="{StaticResource CheckboxStyle}" />
-                <TextBlock Text="Yes" Style="{StaticResource HumanTextBlockStyle}" Margin="0" />
-            </StackPanel>
-            <Button Grid.Column="1" Content="Next" Style="{StaticResource NextButtonStyle}" Click="NextButtonClick"/>
-        </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="0" Text="{Binding PlayerOne.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
+        <TextBlock Grid.Row="1" Text="VERSUS" Style="{StaticResource TextBlockStyle}"/>
+        <TextBox Grid.Row="2" Text="{Binding PlayerTwo.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Next"
+                Style="{StaticResource NextButtonStyle}" Click="NextButtonClick"/>
     </Grid>
 </UserControl>

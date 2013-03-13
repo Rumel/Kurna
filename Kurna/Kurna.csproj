@@ -113,7 +113,6 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Tile.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
-    <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
