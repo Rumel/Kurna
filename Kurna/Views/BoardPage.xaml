@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:Kurna.Views"
              mc:Ignorable="d" 
              d:DesignHeight="640" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="DimGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="96" />
             <RowDefinition Height="*" />
@@ -17,11 +17,11 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!-- Player One -->
-            <TextBlock Grid.Column="0" Text="Player 1" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold"/>
+            <TextBlock Grid.Column="0" Text="Player 1" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold" Background="{Binding }"/>
             <!-- Player Two -->
             <TextBlock Grid.Column="1" Text="Player 2" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold"/>
         </Grid>
-        <views:Board Grid.Row="1" Grid.Column="0">
+        <views:Board Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
         </views:Board>
     </Grid>
 </UserControl>
