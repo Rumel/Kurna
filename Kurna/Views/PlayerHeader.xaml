@@ -13,6 +13,11 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontSize" Value="64" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="BlueViolet" Opacity="0.75" BlurRadius="10" ShadowDepth="0" />
+                </Setter.Value>
+            </Setter>
         </Style>
         <local:Tile x:Key="Tile"/>
     </UserControl.Resources>
@@ -23,17 +28,9 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Text="{Binding PlayerOne.Name}" Style="{StaticResource NameTextBlock}"
                    Foreground ="{Binding PlayerOne.Background}">
-            <TextBlock.Effect>
-                <DropShadowEffect Color="Aqua"
-                                  Opacity="0.75" BlurRadius="10" ShadowDepth="0" />
-            </TextBlock.Effect>
         </TextBlock>
         <TextBlock Grid.Column="1" Text="{Binding PlayerTwo.Name}" Style="{StaticResource NameTextBlock}"
                    Foreground ="{Binding PlayerTwo.Background}">
-            <TextBlock.Effect>
-                <DropShadowEffect Color="BlueViolet"
-                                  Opacity="0.75" BlurRadius="10" ShadowDepth="0" />
-            </TextBlock.Effect>
         </TextBlock>
     </Grid>
 </UserControl>
