@@ -13,7 +13,6 @@ namespace Kurna.Commands
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
         }
 
         public event EventHandler CanExecuteChanged;
