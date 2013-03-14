@@ -45,12 +45,12 @@ namespace Kurna.Models
         public int Column { get; set; }
         public IEnumerable<Tile> AdjacentTiles { get; set; }
 
-        public void ShowIsAvailable()
+        public void Highlight()
         {
             StrokeThickness = 5;
         }
 
-        public void ShowIsUnavailable()
+        public void UnHighlight()
         {
             StrokeThickness = 0;
         }

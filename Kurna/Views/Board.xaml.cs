@@ -19,15 +19,16 @@ namespace Kurna.Views
             InitializeComponent();
         }
 
+        static Game game = ViewModelLocator.GameViewModel.Game;
+        static PlayerViewModel players = ViewModelLocator.PlayerViewModel;
+
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var ellipse = sender as Ellipse;
             if (ellipse == null) return;
-
-            var game = ViewModelLocator.GameViewModel.Game;
-            var players = ViewModelLocator.PlayerViewModel;
             var tile = game.Tiles.FirstOrDefault(t => ellipse.Tag as string == t.TileName);
             if (tile == null) return;
+
             if (game.State == GameState.Placing)
             {
                 if (tile.Status != TileStatus.Unoccupied)
@@ -50,35 +51,56 @@ namespace Kurna.Views
                 else if (players.PlayerTwo.IsPlayersTurn)
                 {
                         tile.Status = TileStatus.P2;
-                        if (players.PlayerTwo.PiecesLeft-- == 0)
+                        if (--players.PlayerTwo.PiecesLeft == 0)
                             game.State = GameState.Moving;
                         players.SwitchTurns();
                 }
             }
             else if (game.State == GameState.Moving)
             {
-                foreach (var t in tile.AdjacentTiles.Where(x => x.Status == TileStatus.Unoccupied))
+                if (game.CurrentlyMovingPiece == null)
+                    // This means that he hasn't selected a piece to move. Highlight the piece
                 {
-                    t.ShowIsAvailable();
+                    if (players.PlayerOne.IsPlayersTurn && tile.Status == TileStatus.P1 ||
+                        players.PlayerTwo.IsPlayersTurn && tile.Status == TileStatus.P2)
+                    {
+                        game.CurrentlyMovingPiece = tile;
+                        tile.Highlight();
+                    }
+                }
+                else
+                // This means that he has already selected a piece to move selected
+                {
+                    if (tile.Status != TileStatus.Unoccupied)
+                    {
+                        game.CurrentlyMovingPiece.UnHighlight();
+                        game.CurrentlyMovingPiece = null;
+                    }
+                    else if (game.CurrentlyMovingPiece.AdjacentTiles.Contains(tile))
+                    {
+                        game.CurrentlyMovingPiece.UnHighlight();
+                        tile.Status = game.CurrentlyMovingPiece.Status;
+                        game.CurrentlyMovingPiece.Status = TileStatus.Unoccupied;
+                        game.CurrentlyMovingPiece = null;
+                    }
                 }
             }
         }
 
-        private void ShowUnavailable(object sender, MouseButtonEventArgs e)
+        private void MouseUpOnElipse(object sender, MouseButtonEventArgs e)
         {
-            //var ellipse = sender as Ellipse;
+            var ellipse = sender as Ellipse;
+            if (ellipse == null) return;
+            var tile = game.Tiles.FirstOrDefault(t => ellipse.Tag as string == t.TileName);
+            if (tile == null) return;
 
-            //var tiles = ellipse.Tag as IEnumerable<Tile>;
-            //if (tiles != null)
-            //    foreach (var tile in tiles)
-            //    {
-            //        tile.ShowIsUnavailable();
-            //    }
+
+            //currentlyMovingPiece = null;
         }
 
-        private void ShowUnavailable2(object sender, MouseEventArgs e)
+        private void MouseMovesOut(object sender, MouseEventArgs e)
         {
-            //ShowUnavailable(sender, null);
+
         }
 
         private void ellipse_MouseMove(object sender, MouseEventArgs e)
