@@ -1,5 +1,4 @@
-﻿using System.Windows.Media;
-using ReactiveUI;
+﻿using ReactiveUI;
 
 namespace Kurna.Models
 {
@@ -7,6 +6,8 @@ namespace Kurna.Models
     {
         private GameState state;
         private ReactiveCollection<Tile> tiles;
+
+        public Tile CurrentlyMovingPiece { get; set; }
 
         public Game()
         {
@@ -26,7 +27,7 @@ namespace Kurna.Models
             set { this.RaiseAndSetIfChanged(ref tiles, value); }
         }
 
-        protected virtual void CreateTiles()
+        protected void CreateTiles()
         {
             // Create the initial tiles
             Tiles = new ReactiveCollection<Tile>(
@@ -63,13 +64,33 @@ namespace Kurna.Models
 
             // Make the connections
 
-            // Outer Top
+            // Outer
             Tiles[0].AdjacentTiles = new[] { Tiles[1], Tiles[3] };
-            Tiles[1].AdjacentTiles = new[] { Tiles[0], Tiles[3], Tiles[8] };
+            Tiles[1].AdjacentTiles = new[] { Tiles[0], Tiles[2], Tiles[9] };
             Tiles[2].AdjacentTiles = new[] { Tiles[1], Tiles[4] };
-
-            // ...
-            // TODO
+            Tiles[3].AdjacentTiles = new[] { Tiles[0], Tiles[5], Tiles[11] };
+            Tiles[4].AdjacentTiles = new[] { Tiles[2], Tiles[7], Tiles[12] };
+            Tiles[5].AdjacentTiles = new[] { Tiles[3], Tiles[6] };
+            Tiles[6].AdjacentTiles = new[] { Tiles[5], Tiles[7], Tiles[14] };
+            Tiles[7].AdjacentTiles = new[] { Tiles[4], Tiles[6] };
+            // Middle
+            Tiles[8].AdjacentTiles = new[] { Tiles[9], Tiles[11] };
+            Tiles[9].AdjacentTiles = new[] { Tiles[1], Tiles[8], Tiles[10], Tiles[17] };
+            Tiles[10].AdjacentTiles = new[] { Tiles[9], Tiles[12] };
+            Tiles[11].AdjacentTiles = new[] { Tiles[3], Tiles[8], Tiles[13], Tiles[19] };
+            Tiles[12].AdjacentTiles = new[] { Tiles[4], Tiles[10], Tiles[15], Tiles[20] };
+            Tiles[13].AdjacentTiles = new[] { Tiles[11], Tiles[14] };
+            Tiles[14].AdjacentTiles = new[] { Tiles[6], Tiles[13], Tiles[15], Tiles[22] };
+            Tiles[15].AdjacentTiles = new[] { Tiles[12], Tiles[14] };
+            // Outer
+            Tiles[16].AdjacentTiles = new[] { Tiles[17], Tiles[19] };
+            Tiles[17].AdjacentTiles = new[] { Tiles[9], Tiles[16], Tiles[18] };
+            Tiles[18].AdjacentTiles = new[] { Tiles[17], Tiles[20] };
+            Tiles[19].AdjacentTiles = new[] { Tiles[11], Tiles[16], Tiles[21] };
+            Tiles[20].AdjacentTiles = new[] { Tiles[18], Tiles[12], Tiles[23] };
+            Tiles[21].AdjacentTiles = new[] { Tiles[19], Tiles[22] };
+            Tiles[22].AdjacentTiles = new[] { Tiles[14], Tiles[21], Tiles[23] };
+            Tiles[23].AdjacentTiles = new[] { Tiles[20], Tiles[22] };
 
             this.RaisePropertyChanged(x => x.Tiles);
         }

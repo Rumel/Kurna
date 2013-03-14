@@ -21,7 +21,5 @@ namespace Kurna.ViewModels
             get { return game; }
             set { this.RaiseAndSetIfChanged(ref game, value); }
         }
-
-        public ReactiveCommand ClickTileToViewMoves { get; private set; }
     }
 }

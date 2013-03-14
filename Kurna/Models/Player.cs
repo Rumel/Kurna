@@ -11,8 +11,8 @@ namespace Kurna.Models
         private string name;
         private int piecesLeft;
         private Brush background;
-        private static readonly Brush InactiveColor = Brushes.White;
-        private static readonly Brush ActiveColor = Brushes.Black;
+        public static readonly Brush InactiveColor = Brushes.White;
+        public static readonly Brush ActiveColor = Brushes.Black;
 
         public Player()
         {
