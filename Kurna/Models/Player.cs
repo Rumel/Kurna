@@ -12,7 +12,7 @@ namespace Kurna.Models
         private string name;
         private int piecesLeft;
         private Brush background;
-        private ReactiveCollection<Mill> lastTurnMills;
+        private ReactiveCollection<Mill> previousMills;
         private int piecesCanRemove;
         private int invisiblePieces;
         public static readonly Brush InactiveColor = Brushes.White;
@@ -22,7 +22,7 @@ namespace Kurna.Models
         {
             InvisiblePieces = 9;
             PiecesLeft = 0;
-            lastTurnMills = new ReactiveCollection<Mill>();
+            previousMills = new ReactiveCollection<Mill>();
         }
 
         public string Name
@@ -40,6 +40,8 @@ namespace Kurna.Models
                 Background = IsPlayersTurn ? ActiveColor : InactiveColor;
             }
         }
+
+        public int Turn { get; set; }
 
         public Brush Background
         {
@@ -71,10 +73,19 @@ namespace Kurna.Models
             set { this.RaiseAndSetIfChanged(ref piecesLeft, value); }
         }
 
-        public ReactiveCollection<Mill> LastTurnMills
+        public ReactiveCollection<Mill> PreviousMills
         {
-            get { return lastTurnMills; }
-            set { this.RaiseAndSetIfChanged(ref lastTurnMills, value); }
+            get { return previousMills; }
+            set { this.RaiseAndSetIfChanged(ref previousMills, value); }
+        }
+
+        private void checkMill(int a, int b, int c, Tile movedTile, TileStatus ts,ReactiveCollection<Tile> tiles, ref Mill tofill)
+        {
+            if (tiles[a].Status == ts && tiles[b].Status == ts && tiles[c].Status == ts &&
+                (movedTile == tiles[a] ||
+                 movedTile == tiles[b] ||
+                 movedTile == tiles[c]))
+                tofill = new Mill(tiles[a], tiles[b], tiles[c]);
         }
 
         /////////// Board Pattern //////////
@@ -89,77 +100,47 @@ namespace Kurna.Models
         //
         public bool AddNewMills(ReactiveCollection<Tile> tiles, TileStatus ts, Tile movedTile)
         {
-            var millsThisTurn = new List<Mill>();
+            Mill currentMill = null;
 
-            // Outer
-            if (tiles[0].Status == ts && tiles[1].Status == ts && tiles[2].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[0], tiles[1], tiles[2]));
+            checkMill(0, 1, 2, movedTile, ts, tiles, ref currentMill);
+            checkMill(0, 3, 5, movedTile, ts, tiles, ref currentMill);
+            checkMill(2, 4, 7, movedTile, ts, tiles, ref currentMill);
+            checkMill(5, 6, 7, movedTile, ts, tiles, ref currentMill);
 
-            if (tiles[0].Status == ts && tiles[3].Status == ts && tiles[5].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[0], tiles[3], tiles[5]));
 
-            if (tiles[2].Status == ts && tiles[4].Status == ts && tiles[7].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[2], tiles[4], tiles[7]));
+            checkMill(8, 9, 10, movedTile, ts, tiles, ref currentMill);
+            checkMill(8, 11, 13, movedTile, ts, tiles, ref currentMill);
+            checkMill(10, 12, 15, movedTile, ts, tiles, ref currentMill);
+            checkMill(13, 14, 15, movedTile, ts, tiles, ref currentMill);
 
-            if (tiles[5].Status == ts && tiles[6].Status == ts && tiles[7].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[5], tiles[6], tiles[7]));
 
-            // Middle
-            if (tiles[8].Status == ts && tiles[9].Status == ts && tiles[10].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[8], tiles[9], tiles[10]));
+            checkMill(16, 17, 18, movedTile, ts, tiles, ref currentMill);
+            checkMill(16, 19, 21, movedTile, ts, tiles, ref currentMill);
+            checkMill(18, 20, 23, movedTile, ts, tiles, ref currentMill);
+            checkMill(21, 22, 23, movedTile, ts, tiles, ref currentMill);
 
-            if (tiles[8].Status == ts && tiles[11].Status == ts && tiles[13].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[8], tiles[11], tiles[13]));
 
-            if (tiles[10].Status == ts && tiles[12].Status == ts && tiles[15].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[10], tiles[21], tiles[15]));
-
-            if (tiles[13].Status == ts && tiles[14].Status == ts && tiles[15].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[13], tiles[14], tiles[15]));
-
-            // Inner
-            if (tiles[16].Status == ts && tiles[17].Status == ts && tiles[18].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[16], tiles[17], tiles[18]));
-
-            if (tiles[16].Status == ts && tiles[19].Status == ts && tiles[21].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[16], tiles[19], tiles[21]));
-
-            if (tiles[18].Status == ts && tiles[20].Status == ts && tiles[23].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[18], tiles[20], tiles[23]));
-
-            if (tiles[21].Status == ts && tiles[22].Status == ts && tiles[23].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[21], tiles[22], tiles[23]));
-
-            // Plus Sign
-            if (tiles[1].Status == ts && tiles[9].Status == ts && tiles[17].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[1], tiles[9], tiles[17]));
-
-            if (tiles[3].Status == ts && tiles[11].Status == ts && tiles[19].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[3], tiles[11], tiles[19]));
-
-            if (tiles[6].Status == ts && tiles[14].Status == ts && tiles[22].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[6], tiles[14], tiles[22]));
-
-            if (tiles[4].Status == ts && tiles[12].Status == ts && tiles[20].Status == ts)
-                millsThisTurn.Add(new Mill(tiles[4], tiles[12], tiles[20]));
+            checkMill(1, 9, 17, movedTile, ts, tiles, ref currentMill);
+            checkMill(3, 11, 19, movedTile, ts, tiles, ref currentMill);
+            checkMill(4, 12, 20, movedTile, ts, tiles, ref currentMill);
+            checkMill(6, 14, 22, movedTile, ts, tiles, ref currentMill);
 
             // Check validity
-            millsThisTurn = new List<Mill>(millsThisTurn.Where(x => x.First == movedTile ||
-                                                                    x.Second == movedTile ||
-                                                                    x.Third == movedTile));
+            if (currentMill == null) return false;
+            currentMill.Turn = Turn;
 
-            if (millsThisTurn.Count == 0) return false;
-            if (millsThisTurn.Count == 1)
-            {
-                return true;
-                if (LastTurnMills.Count > 0)
-                {
+            if (currentMill.First != movedTile &&
+                currentMill.Second != movedTile &&
+                currentMill.Third != movedTile)
+                return false;
 
-                }
-                if (millsThisTurn[0].Equals(LastTurnMills[0]))
-                    ;
-            }
-            else return true;
+            // Check that he's not going back and forth from two mills
+            if (PreviousMills.Count > 1 && currentMill.Equals(PreviousMills[PreviousMills.Count - 2]) && currentMill.Turn - PreviousMills[PreviousMills.Count - 2].Turn <= 2)
+                return false;
+
+            PreviousMills.Add(currentMill);
+
+            return true;
         }
     }
 }

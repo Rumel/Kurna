@@ -27,6 +27,14 @@ namespace Kurna.ViewModels
 
         public void SwitchTurns()
         {
+            if (PlayerOne.IsPlayersTurn)
+            {
+                PlayerOne.Turn++;
+            }
+            if (PlayerTwo.IsPlayersTurn)
+            {
+                PlayerTwo.Turn++;
+            }
             PlayerOne.IsPlayersTurn = !PlayerOne.IsPlayersTurn;
             PlayerTwo.IsPlayersTurn = !PlayerTwo.IsPlayersTurn;
         }

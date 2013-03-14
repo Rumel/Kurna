@@ -7,6 +7,7 @@ namespace Kurna.Models
         public Tile First { get; set; }
         public Tile Second { get; set; }
         public Tile Third { get; set; }
+        public int Turn { get; set; }
 
         public Mill(Tile first, Tile second, Tile third)
         {
