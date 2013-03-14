@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,6 +21,16 @@ namespace Kurna.Views
         static Game game = ViewModelLocator.GameViewModel.Game;
         static PlayerViewModel players = ViewModelLocator.PlayerViewModel;
 
+        enum SelectState
+        {
+            Neutral,
+            PlaceNew,
+            RemoveOpponentPiece,
+            MoveExisting
+        }
+
+        private static SelectState currentState = SelectState.Neutral;
+
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var ellipse = sender as Ellipse;
@@ -29,7 +38,24 @@ namespace Kurna.Views
             var tile = game.Tiles.FirstOrDefault(t => ellipse.Tag as string == t.TileName);
             if (tile == null) return;
 
-            if (game.State == GameState.Placing)
+            if (currentState == SelectState.RemoveOpponentPiece)
+            {
+                if (players.PlayerOne.IsPlayersTurn && tile.Status == TileStatus.P1)
+                {
+                    tile.Status = TileStatus.Unoccupied;
+                    players.PlayerTwo.PiecesLeft--;
+                    currentState = SelectState.Neutral;
+                    players.SwitchTurns();
+                }
+                else if (players.PlayerTwo.IsPlayersTurn && tile.Status == TileStatus.P2)
+                {
+                    tile.Status = TileStatus.Unoccupied;
+                    players.PlayerOne.PiecesLeft--;
+                    currentState = SelectState.Neutral;
+                    players.SwitchTurns();
+                }
+            }
+            else if (game.State == GameState.Placing)
             {
                 if (tile.Status != TileStatus.Unoccupied)
                 {
@@ -37,29 +63,30 @@ namespace Kurna.Views
                 }
                 else if (players.PlayerOne.IsPlayersTurn)
                 {
-                    if (players.PlayerOne.PiecesLeft == 0)
+                    tile.Status = TileStatus.P1;
+                    players.PlayerOne.PiecesLeft--;
+                    if (players.PlayerOne.AddNewMills(game.Tiles, TileStatus.P1))
                     {
-                        game.State = GameState.Moving;
+                        currentState = SelectState.RemoveOpponentPiece;
                     }
-                    else
-                    {
-                        tile.Status = TileStatus.P1;
-                        players.PlayerOne.PiecesLeft--;
-                        players.SwitchTurns();
-                    }
+                    else players.SwitchTurns();
                 }
                 else if (players.PlayerTwo.IsPlayersTurn)
                 {
-                        tile.Status = TileStatus.P2;
-                        if (--players.PlayerTwo.PiecesLeft == 0)
-                            game.State = GameState.Moving;
-                        players.SwitchTurns();
+                    tile.Status = TileStatus.P2;
+                    if (--players.PlayerTwo.PiecesLeft == 0)
+                        game.State = GameState.Moving;
+                    if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2))
+                    {
+                        currentState = SelectState.RemoveOpponentPiece;
+                    }
+                    else players.SwitchTurns();
                 }
             }
             else if (game.State == GameState.Moving)
             {
                 if (game.CurrentlyMovingPiece == null)
-                    // This means that he hasn't selected a piece to move. Highlight the piece
+                // This means that he hasn't selected a piece to move. Highlight the piece
                 {
                     if (players.PlayerOne.IsPlayersTurn && tile.Status == TileStatus.P1 ||
                         players.PlayerTwo.IsPlayersTurn && tile.Status == TileStatus.P2)
@@ -71,18 +98,14 @@ namespace Kurna.Views
                 else
                 // This means that he has already selected a piece to move selected
                 {
-                    if (tile.Status != TileStatus.Unoccupied)
+                    if (tile.Status == TileStatus.Unoccupied && game.CurrentlyMovingPiece.AdjacentTiles.Contains(tile))
                     {
-                        game.CurrentlyMovingPiece.UnHighlight();
-                        game.CurrentlyMovingPiece = null;
-                    }
-                    else if (game.CurrentlyMovingPiece.AdjacentTiles.Contains(tile))
-                    {
-                        game.CurrentlyMovingPiece.UnHighlight();
                         tile.Status = game.CurrentlyMovingPiece.Status;
                         game.CurrentlyMovingPiece.Status = TileStatus.Unoccupied;
-                        game.CurrentlyMovingPiece = null;
+                        players.SwitchTurns();
                     }
+                    game.CurrentlyMovingPiece.UnHighlight();
+                    game.CurrentlyMovingPiece = null;
                 }
             }
         }

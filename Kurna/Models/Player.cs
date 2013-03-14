@@ -11,12 +11,14 @@ namespace Kurna.Models
         private string name;
         private int piecesLeft;
         private Brush background;
+        private ReactiveCollection<List<Tile>> mills;
         public static readonly Brush InactiveColor = Brushes.White;
         public static readonly Brush ActiveColor = Brushes.Black;
 
         public Player()
         {
             PiecesLeft = 9;
+            mills = new ReactiveCollection<List<Tile>>();
         }
 
         public string Name
@@ -40,10 +42,6 @@ namespace Kurna.Models
             get { return background; }
             set { this.RaiseAndSetIfChanged(ref background, value); }
         }
-        //{
-        //    get
-        //    { return IsPlayersTurn ? ActiveColor : InactiveColor; }
-        //}
 
         public bool IsComputer
         {
@@ -57,17 +55,10 @@ namespace Kurna.Models
             set { this.RaiseAndSetIfChanged(ref piecesLeft, value); }
         }
 
-        private List<List<string>> mills = new List<List<string>>();
-        public List<List<string>> Mills
+        public ReactiveCollection<List<Tile>> Mills
         {
-            get
-            {
-                return mills;
-            }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref mills, value);
-            }
+            get { return mills; }
+            set { this.RaiseAndSetIfChanged(ref mills, value); }
         }
 
         //Board Pattern
@@ -80,75 +71,53 @@ namespace Kurna.Models
         //      [13]      [14]      [15]
         //  [5]           [6]            [7]
         //
-        public void AddNewMills(ReactiveCollection<Tile> tiles, TileStatus ts)
+        public bool AddNewMills(ReactiveCollection<Tile> tiles, TileStatus ts)
         {
-            List<string> cm = new List<string>();
-            #region MillChecking
-            #region Outer
+            var thisTurn = new List<Tile>();
+
+            // Outer
             if (tiles[0].Status == ts && tiles[1].Status == ts && tiles[2].Status == ts)
-            {
-                cm.Add("OuterTop");
-            }
+                thisTurn.AddRange(new[] { tiles[0], tiles[1], tiles[2] });
 
             if (tiles[0].Status == ts && tiles[3].Status == ts && tiles[5].Status == ts)
-            {
-                cm.Add("OuterLeft");
-            }
+                thisTurn.AddRange(new[] { tiles[0], tiles[3], tiles[5] });
 
             if (tiles[2].Status == ts && tiles[4].Status == ts && tiles[7].Status == ts)
-            {
-                cm.Add("OuterRight");
-            }
+                thisTurn.AddRange(new[] { tiles[2], tiles[4], tiles[7] });
 
             if (tiles[5].Status == ts && tiles[6].Status == ts && tiles[7].Status == ts)
-            {
-                cm.Add("OuterBottom");
-            }
-            #endregion
-            #region Middle
+                thisTurn.AddRange(new[] { tiles[5], tiles[6], tiles[7] });
+
+            // Middle
             if (tiles[8].Status == ts && tiles[9].Status == ts && tiles[10].Status == ts)
-            {
-                cm.Add("MiddleTop");
-            }
+                thisTurn.AddRange(new[] { tiles[8], tiles[9], tiles[10] });
 
             if (tiles[8].Status == ts && tiles[11].Status == ts && tiles[13].Status == ts)
-            {
-                cm.Add("MiddleLeft");
-            }
+                thisTurn.AddRange(new[] { tiles[8], tiles[11], tiles[13] });
 
             if (tiles[10].Status == ts && tiles[12].Status == ts && tiles[15].Status == ts)
-            {
-                cm.Add("MiddleRight");
-            }
+                thisTurn.AddRange(new[] { tiles[10], tiles[21], tiles[15] });
 
             if (tiles[13].Status == ts && tiles[14].Status == ts && tiles[15].Status == ts)
-            {
-                cm.Add("MiddleBottom");
-            }
-            #endregion
-            #region Inner
+                thisTurn.AddRange(new[] { tiles[13], tiles[14], tiles[15] });
+
+            // Inner
             if (tiles[16].Status == ts && tiles[17].Status == ts && tiles[18].Status == ts)
-            {
-                cm.Add("InnerTop");
-            }
+                thisTurn.AddRange(new[] { tiles[16], tiles[17], tiles[18] });
 
             if (tiles[16].Status == ts && tiles[19].Status == ts && tiles[21].Status == ts)
-            {
-                cm.Add("InnerLeft");
-            }
+                thisTurn.AddRange(new[] { tiles[16], tiles[19], tiles[21] });
 
             if (tiles[18].Status == ts && tiles[20].Status == ts && tiles[23].Status == ts)
-            {
-                cm.Add("InnerRight");
-            }
+                thisTurn.AddRange(new[] { tiles[18], tiles[20], tiles[23] });
 
             if (tiles[21].Status == ts && tiles[22].Status == ts && tiles[23].Status == ts)
-            {
-                cm.Add("InnerBottom");
-            }
-            #endregion
-            #endregion
-            Mills.Add(cm);
+                thisTurn.AddRange(new[] { tiles[21], tiles[22], tiles[23] });
+
+            // Add all mills
+            Mills.Add(thisTurn);
+
+            return thisTurn.Count > 0;
         }
     }
 }
