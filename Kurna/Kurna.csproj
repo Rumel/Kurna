@@ -110,6 +110,7 @@
     <Compile Include="Commands\TileClickToViewMovesCommand.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\Mill.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Tile.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
