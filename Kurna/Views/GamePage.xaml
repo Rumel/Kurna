@@ -11,7 +11,7 @@
             <RowDefinition Height="96" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <views:PlayerHeader Grid.Row="0"/>
+        <views:PlayerHeader Grid.Row="0" HorizontalAlignment="Stretch"/>
         <views:Board Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
         </views:Board>
     </Grid>

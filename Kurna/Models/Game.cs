@@ -4,6 +4,7 @@ namespace Kurna.Models
 {
     public class Game : ReactiveObject
     {
+        private string winner = "";
         private GameState state;
         private ReactiveCollection<Tile> tiles;
 
@@ -25,6 +26,12 @@ namespace Kurna.Models
         {
             get { return tiles; }
             set { this.RaiseAndSetIfChanged(ref tiles, value); }
+        }
+
+        public string Winner
+        {
+            get { return winner; }
+            set { this.RaiseAndSetIfChanged(ref winner, value);  }
         }
 
         protected void CreateTiles()
