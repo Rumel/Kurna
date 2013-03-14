@@ -7,8 +7,14 @@ namespace Kurna.Models
     public class Tile : ReactiveObject
     {
         public static readonly Brush UnoccupiedColor = Brushes.White;
-        public static readonly Brush P1Color = Brushes.Aqua;
-        public static readonly Brush P2Color = Brushes.BlueViolet;
+        public static Brush P1Color
+        {
+            get { return Brushes.Aqua; }
+        }
+        public static Brush P2Color
+        {
+            get { return Brushes.BlueViolet; }
+        }
         private Brush fillColor;
         private int strokeThickness;
         private TileStatus tileStatus;
@@ -39,12 +45,12 @@ namespace Kurna.Models
         public int Column { get; set; }
         public IEnumerable<Tile> AdjacentTiles { get; set; }
 
-        public void ShowIsAvailable()
+        public void Highlight()
         {
             StrokeThickness = 5;
         }
 
-        public void ShowIsUnavailable()
+        public void UnHighlight()
         {
             StrokeThickness = 0;
         }
