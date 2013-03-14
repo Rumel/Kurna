@@ -40,14 +40,14 @@ namespace Kurna.Views
 
             if (currentState == SelectState.RemoveOpponentPiece)
             {
-                if (players.PlayerOne.IsPlayersTurn && tile.Status == TileStatus.P1)
+                if (players.PlayerOne.IsPlayersTurn && tile.Status == TileStatus.P2)
                 {
                     tile.Status = TileStatus.Unoccupied;
                     players.PlayerTwo.PiecesLeft--;
                     currentState = SelectState.Neutral;
                     players.SwitchTurns();
                 }
-                else if (players.PlayerTwo.IsPlayersTurn && tile.Status == TileStatus.P2)
+                else if (players.PlayerTwo.IsPlayersTurn && tile.Status == TileStatus.P1)
                 {
                     tile.Status = TileStatus.Unoccupied;
                     players.PlayerOne.PiecesLeft--;
@@ -64,8 +64,9 @@ namespace Kurna.Views
                 else if (players.PlayerOne.IsPlayersTurn)
                 {
                     tile.Status = TileStatus.P1;
-                    players.PlayerOne.PiecesLeft--;
-                    if (players.PlayerOne.AddNewMills(game.Tiles, TileStatus.P1))
+                    players.PlayerOne.InvisiblePieces--;
+                    players.PlayerOne.PiecesLeft++;
+                    if (players.PlayerOne.AddNewMills(game.Tiles, TileStatus.P1, tile))
                     {
                         currentState = SelectState.RemoveOpponentPiece;
                     }
@@ -74,13 +75,18 @@ namespace Kurna.Views
                 else if (players.PlayerTwo.IsPlayersTurn)
                 {
                     tile.Status = TileStatus.P2;
-                    if (--players.PlayerTwo.PiecesLeft == 0)
-                        game.State = GameState.Moving;
-                    if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2))
+                    players.PlayerTwo.InvisiblePieces--;
+                    players.PlayerTwo.PiecesLeft++;
+                    if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2, tile))
                     {
                         currentState = SelectState.RemoveOpponentPiece;
                     }
                     else players.SwitchTurns();
+                }
+                if (players.PlayerOne.InvisiblePieces == 0 &&
+                    players.PlayerTwo.InvisiblePieces == 0)
+                {
+                    game.State = GameState.Moving;
                 }
             }
             else if (game.State == GameState.Moving)
@@ -102,6 +108,22 @@ namespace Kurna.Views
                     {
                         tile.Status = game.CurrentlyMovingPiece.Status;
                         game.CurrentlyMovingPiece.Status = TileStatus.Unoccupied;
+                        if (players.PlayerOne.IsPlayersTurn)
+                        {
+                            if (players.PlayerOne.AddNewMills(game.Tiles, TileStatus.P1, tile))
+                            {
+                                tile.Status = game.CurrentlyMovingPiece.Status;
+                                currentState = SelectState.RemoveOpponentPiece;
+                            }
+                        }
+                        else if (players.PlayerTwo.IsPlayersTurn)
+                        {
+                            if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2, tile))
+                            {
+                                tile.Status = game.CurrentlyMovingPiece.Status;
+                                currentState = SelectState.RemoveOpponentPiece;
+                            }
+                        }
                         players.SwitchTurns();
                     }
                     game.CurrentlyMovingPiece.UnHighlight();
