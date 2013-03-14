@@ -43,14 +43,22 @@ namespace Kurna.Views
                 if (players.PlayerOne.IsPlayersTurn && tile.Status == TileStatus.P2)
                 {
                     tile.Status = TileStatus.Unoccupied;
-                    players.PlayerTwo.PiecesLeft--;
+                    if (--players.PlayerTwo.PiecesLeft == 3) game.State = GameState.Flying;
+                    if (--players.PlayerTwo.PiecesLeft == 2)
+                    {
+                        // game over logic
+                    }
                     currentState = SelectState.Neutral;
                     players.SwitchTurns();
                 }
                 else if (players.PlayerTwo.IsPlayersTurn && tile.Status == TileStatus.P1)
                 {
                     tile.Status = TileStatus.Unoccupied;
-                    players.PlayerOne.PiecesLeft--;
+                    if (--players.PlayerOne.PiecesLeft == 3) game.State = GameState.Flying;
+                    if (--players.PlayerOne.PiecesLeft == 2)
+                    {
+                        // game over logic
+                    }
                     currentState = SelectState.Neutral;
                     players.SwitchTurns();
                 }
@@ -112,19 +120,58 @@ namespace Kurna.Views
                         {
                             if (players.PlayerOne.AddNewMills(game.Tiles, TileStatus.P1, tile))
                             {
-                                tile.Status = game.CurrentlyMovingPiece.Status;
                                 currentState = SelectState.RemoveOpponentPiece;
                             }
+                            else players.SwitchTurns();
                         }
                         else if (players.PlayerTwo.IsPlayersTurn)
                         {
                             if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2, tile))
                             {
-                                tile.Status = game.CurrentlyMovingPiece.Status;
                                 currentState = SelectState.RemoveOpponentPiece;
                             }
+                            else players.SwitchTurns();
                         }
-                        players.SwitchTurns();
+                    }
+                    game.CurrentlyMovingPiece.UnHighlight();
+                    game.CurrentlyMovingPiece = null;
+                }
+            }
+            else if (game.State == GameState.Flying)
+            {
+                if (game.CurrentlyMovingPiece == null)
+                // This means that he hasn't selected a piece to move. Highlight the piece
+                {
+                    if (players.PlayerOne.IsPlayersTurn && tile.Status == TileStatus.P1 ||
+                        players.PlayerTwo.IsPlayersTurn && tile.Status == TileStatus.P2)
+                    {
+                        game.CurrentlyMovingPiece = tile;
+                        tile.Highlight();
+                    }
+                }
+                else
+                // This means that he has already selected a piece to move selected
+                {
+                    if (tile.Status == TileStatus.Unoccupied)
+                    {
+                        tile.Status = game.CurrentlyMovingPiece.Status;
+                        game.CurrentlyMovingPiece.Status = TileStatus.Unoccupied;
+                        if (players.PlayerOne.IsPlayersTurn)
+                        {
+                            if (players.PlayerOne.AddNewMills(game.Tiles, TileStatus.P1, tile))
+                            {
+                                currentState = SelectState.RemoveOpponentPiece;
+                            }
+                            else players.SwitchTurns();
+                        }
+                        else if (players.PlayerTwo.IsPlayersTurn)
+                        {
+                            if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2, tile))
+                            {
+                                currentState = SelectState.RemoveOpponentPiece;
+                            }
+                            else players.SwitchTurns();
+                        }
                     }
                     game.CurrentlyMovingPiece.UnHighlight();
                     game.CurrentlyMovingPiece = null;

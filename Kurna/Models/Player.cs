@@ -16,7 +16,7 @@ namespace Kurna.Models
         private int piecesCanRemove;
         private int invisiblePieces;
         public static readonly Brush InactiveColor = Brushes.White;
-        public static readonly Brush ActiveColor = Brushes.Black;
+        public static readonly Brush ActiveColor = Brushes.Red;
 
         public Player()
         {
