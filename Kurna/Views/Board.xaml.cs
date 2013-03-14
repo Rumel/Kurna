@@ -49,6 +49,10 @@ namespace Kurna.Views
                     if (players.PlayerTwo.PiecesLeft == 2 && players.PlayerTwo.InvisiblePieces == 0)
                     {
                         // game over logic
+                        players.PlayerOne.IsPlayersTurn = false;
+                        players.PlayerTwo.IsPlayersTurn = false;
+                        game.Winner = players.PlayerOne.Name;
+                        this.Content = new GameOverPage();
                     }
                     currentState = SelectState.Neutral;
                     players.SwitchTurns();
@@ -62,6 +66,10 @@ namespace Kurna.Views
                     if (--players.PlayerOne.PiecesLeft == 2 && players.PlayerOne.InvisiblePieces == 0)
                     {
                         // game over logic
+                        players.PlayerOne.IsPlayersTurn = false;
+                        players.PlayerTwo.IsPlayersTurn = false;
+                        game.Winner = players.PlayerTwo.Name;
+                        this.Content = new GameOverPage();
                     }
                     currentState = SelectState.Neutral;
                     players.SwitchTurns();
