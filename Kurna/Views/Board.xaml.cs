@@ -61,9 +61,9 @@ namespace Kurna.Views
                 {
                     tile.Status = TileStatus.Unoccupied;
                     players.PlayerOne.PiecesLeft--;
-                    if (--players.PlayerOne.PiecesLeft == 3 && players.PlayerOne.InvisiblePieces == 0)
+                    if (players.PlayerOne.PiecesLeft == 3 && players.PlayerOne.InvisiblePieces == 0)
                         game.State = GameState.Flying;
-                    if (--players.PlayerOne.PiecesLeft == 2 && players.PlayerOne.InvisiblePieces == 0)
+                    if (players.PlayerOne.PiecesLeft == 2 && players.PlayerOne.InvisiblePieces == 0)
                     {
                         // game over logic
                         players.PlayerOne.IsPlayersTurn = false;
