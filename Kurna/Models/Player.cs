@@ -1,6 +1,7 @@
 ﻿using System.Windows.Media;
 using ReactiveUI;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace Kurna.Models
 {
@@ -10,6 +11,8 @@ namespace Kurna.Models
         private bool isPlayersTurn;
         private string name;
         private int piecesLeft;
+        private Visibility piecesLeftVisibility = Visibility.Visible;
+        private string statusMessage;
         private Brush background;
         public static readonly Brush InactiveColor = Brushes.White;
         public static readonly Brush ActiveColor = Brushes.Black;
@@ -54,7 +57,26 @@ namespace Kurna.Models
         public int PiecesLeft
         {
             get { return piecesLeft; }
-            set { this.RaiseAndSetIfChanged(ref piecesLeft, value); }
+            set
+            { 
+                this.RaiseAndSetIfChanged(ref piecesLeft, value);
+                if (piecesLeft == 0)
+                {
+                    this.PiecesLeftVisibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        public Visibility PiecesLeftVisibility
+        {
+            get { return piecesLeftVisibility; }
+            set { this.RaiseAndSetIfChanged(ref piecesLeftVisibility, value); }
+        }
+
+        public string StatusMessage
+        {
+            get { return statusMessage; }
+            set { this.RaiseAndSetIfChanged(ref statusMessage, value); }
         }
 
         private List<List<string>> mills = new List<List<string>>();
