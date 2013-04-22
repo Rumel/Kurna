@@ -64,9 +64,25 @@
         </Grid.ColumnDefinitions>
         <TextBox Grid.Row="0" Text="{Binding PlayerOne.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Computer?" FontSize="24" FontWeight="Bold"/>
+            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding PlayerOne.IsComputer}">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </StackPanel>
         <TextBlock Grid.Row="1" Text="VERSUS" Style="{StaticResource TextBlockStyle}"/>
         <TextBox Grid.Row="2" Text="{Binding PlayerTwo.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Style="{StaticResource NameTextBoxStyle}" MaxLength="16" MaxLines="1"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Computer?" FontSize="24" FontWeight="Bold"/>
+            <CheckBox HorizontalAlignment="Center"  IsChecked="{Binding PlayerTwo.IsComputer}">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </StackPanel>
         <Button Grid.Column="1" Grid.Row="1" Content="Next"
                 Style="{StaticResource NextButtonStyle}" Click="NextButtonClick"/>
     </Grid>
