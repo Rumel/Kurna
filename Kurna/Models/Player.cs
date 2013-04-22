@@ -7,7 +7,7 @@ namespace Kurna.Models
 {
     public class Player : ReactiveObject
     {
-        private bool isComputer;
+        private bool isComputer = false;
         private bool isPlayersTurn;
         private string name;
         private int piecesLeft;
