@@ -204,70 +204,33 @@ namespace Kurna.Views
 
         private void PlayComputer()
         {
-            Player currentPlayer = null;
-            bool isPlayerOne = true;
-            if (players.PlayerOne.IsPlayersTurn && players.PlayerOne.IsComputer)
+            if (players.PlayerTwo.IsPlayersTurn && players.PlayerTwo.IsComputer)
             {
-                currentPlayer = players.PlayerOne;
-                isPlayerOne = true;
-            }
-            else if(players.PlayerTwo.IsPlayersTurn && players.PlayerTwo.IsComputer){
-                currentPlayer = players.PlayerTwo;
-                isPlayerOne = false;
-            }
 
-            if (currentPlayer != null)
-            {
                 System.Threading.Thread.Sleep(TimeSpan.FromMilliseconds(200));
                 if (currentState == SelectState.RemoveOpponentPiece)
                 {
                     #region RemoveOpponentPiece
-                    if (isPlayerOne)
+                    var possibleTiles = game.Tiles.Where(x => x.Status == TileStatus.P1);
+                    Random r = new Random();
+                    var index = r.Next(possibleTiles.Count());
+                    var tileA = possibleTiles.ToArray()[index];
+                    var tile = game.Tiles.FirstOrDefault(x => x.TileName == tileA.TileName);
+                    tile.Status = TileStatus.Unoccupied;
+                    Debug.WriteLine("{0} removing tile {1}", players.PlayerTwo.Name, tile.TileName);
+                    players.PlayerOne.PiecesLeft--;
+                    if (players.PlayerOne.PiecesLeft == 3 && players.PlayerOne.InvisiblePieces == 0)
+                        game.State = GameState.Flying;
+                    if (players.PlayerOne.PiecesLeft == 2 && players.PlayerOne.InvisiblePieces == 0)
                     {
-                        var possibleTiles = game.Tiles.Where(x => x.Status == TileStatus.P2);
-                        Random r = new Random();
-                        var index = r.Next(possibleTiles.Count());
-                        var tileA = possibleTiles.ToArray()[index];
-                        var tile = game.Tiles.FirstOrDefault(x => x.TileName == tileA.TileName);
-                        tile.Status = TileStatus.Unoccupied;
-                        Debug.WriteLine("{0} removing tile {1}", currentPlayer.Name, tile.TileName);
-                        players.PlayerTwo.PiecesLeft--;
-                        if (players.PlayerTwo.PiecesLeft == 3 && players.PlayerTwo.InvisiblePieces == 0)
-                            game.State = GameState.Flying;
-                        if (players.PlayerTwo.PiecesLeft == 2 && players.PlayerTwo.InvisiblePieces == 0)
-                        {
-                            // game over logic
-                            players.PlayerOne.IsPlayersTurn = false;
-                            players.PlayerTwo.IsPlayersTurn = false;
-                            game.Winner = players.PlayerOne.Name;
-                            this.Content = new GameOverPage();
-                        }
-                        currentState = SelectState.Neutral;
-                        players.SwitchTurns();
+                        // game over logic
+                        players.PlayerOne.IsPlayersTurn = false;
+                        players.PlayerTwo.IsPlayersTurn = false;
+                        game.Winner = players.PlayerTwo.Name;
+                        this.Content = new GameOverPage();
                     }
-                    else
-                    {
-                        var possibleTiles = game.Tiles.Where(x => x.Status == TileStatus.P1);
-                        Random r = new Random();
-                        var index = r.Next(possibleTiles.Count());
-                        var tileA = possibleTiles.ToArray()[index];
-                        var tile = game.Tiles.FirstOrDefault(x => x.TileName == tileA.TileName);
-                        tile.Status = TileStatus.Unoccupied;
-                        Debug.WriteLine("{0} removing tile {1}", currentPlayer.Name, tile.TileName);
-                        players.PlayerOne.PiecesLeft--;
-                        if (players.PlayerOne.PiecesLeft == 3 && players.PlayerOne.InvisiblePieces == 0)
-                            game.State = GameState.Flying;
-                        if (players.PlayerOne.PiecesLeft == 2 && players.PlayerOne.InvisiblePieces == 0)
-                        {
-                            // game over logic
-                            players.PlayerOne.IsPlayersTurn = false;
-                            players.PlayerTwo.IsPlayersTurn = false;
-                            game.Winner = players.PlayerTwo.Name;
-                            this.Content = new GameOverPage();
-                        }
-                        currentState = SelectState.Neutral;
-                        players.SwitchTurns();
-                    }
+                    currentState = SelectState.Neutral;
+                    players.SwitchTurns();
                     #endregion
                 }
                 else if (game.State == GameState.Placing)
@@ -277,34 +240,17 @@ namespace Kurna.Views
                     Random r = new Random();
                     int tileIndex = r.Next(openTiles.Count());
                     var tile = openTiles.ToArray()[tileIndex];
-                    Debug.WriteLine("{0} {1}", currentPlayer.Name, tile.TileName);
-                    if (isPlayerOne)
+                    Debug.WriteLine("{0} {1}", players.PlayerTwo.Name, tile.TileName);
+                    game.Tiles.FirstOrDefault(x => x.TileName == tile.TileName).Status = TileStatus.P2;
+                    players.PlayerTwo.InvisiblePieces--;
+                    players.PlayerTwo.PiecesLeft++;
+                    if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2, tile))
                     {
-                        game.Tiles.FirstOrDefault(x => x.TileName == tile.TileName).Status = TileStatus.P1;
-                        currentPlayer.InvisiblePieces--;
-                        currentPlayer.PiecesLeft++;
-                        if (currentPlayer.AddNewMills(game.Tiles, TileStatus.P1, tile))
-                        {
-                            currentState = SelectState.RemoveOpponentPiece;
-                        }
-                        else
-                        {
-                            players.SwitchTurns();
-                        }
+                        currentState = SelectState.RemoveOpponentPiece;
                     }
                     else
                     {
-                        game.Tiles.FirstOrDefault(x => x.TileName == tile.TileName).Status = TileStatus.P2;
-                        currentPlayer.InvisiblePieces--;
-                        currentPlayer.PiecesLeft++;
-                        if (currentPlayer.AddNewMills(game.Tiles, TileStatus.P2, tile))
-                        {
-                            currentState = SelectState.RemoveOpponentPiece;
-                        }
-                        else
-                        {
-                            players.SwitchTurns();
-                        }
+                        players.SwitchTurns();
                     }
 
                     if (players.PlayerOne.InvisiblePieces == 0 && players.PlayerTwo.InvisiblePieces == 0)
@@ -322,11 +268,6 @@ namespace Kurna.Views
                 {
 
                 }
-            }
-
-            if (players.PlayerOne.IsPlayersTurn && players.PlayerOne.IsComputer)
-            {
-                PlayComputer();
             }
             else if (players.PlayerTwo.IsPlayersTurn && players.PlayerTwo.IsComputer)
             {
@@ -377,11 +318,6 @@ namespace Kurna.Views
 
         private void ellipse_Drop(object sender, DragEventArgs e)
         {
-        }
-
-        private void UserControl_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            PlayComputer();
         }
     }
 }

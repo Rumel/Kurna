@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Kurna.Models"
              mc:Ignorable="d" 
              d:DesignHeight="448" d:DesignWidth="448"
-             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=GameViewModel}" FocusableChanged="UserControl_FocusableChanged">
+             DataContext="{Binding Source={StaticResource ViewModelLocator}, Path=GameViewModel}">
     <UserControl.Resources>
         <GridLength x:Key="OuterWidth">64</GridLength>
         <GridLength x:Key="OuterHeight">64</GridLength>
