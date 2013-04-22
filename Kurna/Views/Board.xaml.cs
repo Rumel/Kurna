@@ -260,13 +260,40 @@ namespace Kurna.Views
                     }
                     #endregion
                 }
-                else if (game.State == GameState.Moving)
+                else if (game.State == GameState.Moving || game.State == GameState.Flying)
                 {
-
-                }
-                else if (game.State == GameState.Flying)
-                {
-
+                    #region Moving
+                    var myTiles = game.Tiles.Where(x => x.Status == TileStatus.P2);
+                    var contprog = false;
+                    Random r = new Random();
+                    Tile newTile = null;
+                    while (!contprog)
+                    {
+                        var index = r.Next(myTiles.Count());
+                        var tile = myTiles.ToArray()[index];
+                        var possible = tile.AdjacentTiles.ToArray();
+                        for (int i = 0; i < possible.Count(); i++)
+                        {
+                            var current = game.Tiles.FirstOrDefault(x => x.TileName == possible[i].TileName);
+                            if (current.Status == TileStatus.Unoccupied)
+                            {
+                                current.Status = TileStatus.P2;
+                                game.Tiles.FirstOrDefault(x => x.TileName == tile.TileName).Status = TileStatus.Unoccupied;
+                                newTile = current;
+                                contprog = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (players.PlayerTwo.AddNewMills(game.Tiles, TileStatus.P2, newTile))
+                    {
+                        currentState = SelectState.RemoveOpponentPiece;
+                    }
+                    else
+                    { 
+                        players.SwitchTurns();
+                    }
+                    #endregion
                 }
             }
             else if (players.PlayerTwo.IsPlayersTurn && players.PlayerTwo.IsComputer)
