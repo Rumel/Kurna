@@ -1,7 +1,3 @@
-#Please delete this
-
---------
-
 Kurna
 =====
 
